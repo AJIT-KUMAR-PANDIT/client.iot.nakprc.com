@@ -1,0 +1,406 @@
+{
+  "routines": [
+    {
+      "id": "routine1",
+      "name": "Good Morning",
+      "icon": "🌅",
+      "active": true,
+      "createdBy": "user1",
+      "createdAt": "2025-01-15T08:30:00.000Z",
+      "updatedAt": "2025-03-10T14:45:22.456Z",
+      "trigger": {
+        "type": "time",
+        "time": "06:30",
+        "days": ["monday", "tuesday", "wednesday", "thursday", "friday"]
+      },
+      "conditions": [
+        {
+          "type": "presence",
+          "condition": "anyone_home",
+          "value": true
+        }
+      ],
+      "actions": [
+        {
+          "deviceId": "device8",
+          "action": "setPower",
+          "value": true
+        },
+        {
+          "deviceId": "device8",
+          "action": "setBrightness",
+          "value": 30
+        },
+        {
+          "deviceId": "device11",
+          "action": "setTemperature",
+          "value": 72
+        },
+        {
+          "deviceId": "device6",
+          "action": "setPower",
+          "value": true
+        },
+        {
+          "deviceId": "device12",
+          "action": "setPosition",
+          "value": 100
+        }
+      ],
+      "lastRun": "2025-05-08T06:30:00.000Z",
+      "nextRun": "2025-05-09T06:30:00.000Z"
+    },
+    {
+      "id": "routine2",
+      "name": "Leave for Work",
+      "icon": "🚶",
+      "active": true,
+      "createdBy": "user1",
+      "createdAt": "2025-01-20T10:15:00.000Z",
+      "updatedAt": "2025-03-10T14:50:22.456Z",
+      "trigger": {
+        "type": "time",
+        "time": "08:00",
+        "days": ["monday", "tuesday", "wednesday", "thursday", "friday"]
+      },
+      "conditions": [],
+      "actions": [
+        {
+          "deviceId": "group1",
+          "action": "setPower",
+          "value": false
+        },
+        {
+          "deviceId": "group2",
+          "action": "setTemperature",
+          "value": 76
+        },
+        {
+          "deviceId": "group3",
+          "action": "setArmed",
+          "value": true
+        }
+      ],
+      "lastRun": "2025-05-08T08:00:00.000Z",
+      "nextRun": "2025-05-09T08:00:00.000Z"
+    },
+    {
+      "id": "routine3",
+      "name": "Arrive Home",
+      "icon": "🏠",
+      "active": true,
+      "createdBy": "user1",
+      "createdAt": "2025-01-20T11:30:00.000Z",
+      "updatedAt": "2025-03-10T14:55:22.456Z",
+      "trigger": {
+        "type": "time",
+        "time": "17:30",
+        "days": ["monday", "tuesday", "wednesday", "thursday", "friday"]
+      },
+      "conditions": [],
+      "actions": [
+        {
+          "deviceId": "device1",
+          "action": "setPower",
+          "value": true
+        },
+        {
+          "deviceId": "device1",
+          "action": "setBrightness",
+          "value": 70
+        },
+        {
+          "deviceId": "device10",
+          "action": "setTemperature",
+          "value": 72
+        },
+        {
+          "deviceId": "group3",
+          "action": "setArmed",
+          "value": false
+        }
+      ],
+      "lastRun": "2025-05-07T17:30:00.000Z",
+      "nextRun": "2025-05-08T17:30:00.000Z"
+    },
+    {
+      "id": "routine4",
+      "name": "Bedtime",
+      "icon": "🌙",
+      "active": true,
+      "createdBy": "user1",
+      "createdAt": "2025-01-21T20:45:00.000Z",
+      "updatedAt": "2025-03-10T15:00:22.456Z",
+      "trigger": {
+        "type": "time",
+        "time": "22:30",
+        "days": ["everyday"]
+      },
+      "conditions": [],
+      "actions": [
+        {
+          "deviceId": "group1",
+          "action": "setPower",
+          "value": false
+        },
+        {
+          "deviceId": "group2",
+          "action": "setTemperature",
+          "value": 68
+        },
+        {
+          "deviceId": "group3",
+          "action": "setArmed",
+          "value": true,
+          "mode": "home"
+        }
+      ],
+      "lastRun": "2025-05-07T22:30:00.000Z",
+      "nextRun": "2025-05-08T22:30:00.000Z"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "scene1",
+      "name": "Movie Night",
+      "icon": "🎬",
+      "createdBy": "user1",
+      "createdAt": "2025-02-10T19:30:00.000Z",
+      "updatedAt": "2025-04-05T20:15:22.456Z",
+      "actions": [
+        {
+          "deviceId": "device1",
+          "action": "setPower",
+          "value": true
+        },
+        {
+          "deviceId": "device1",
+          "action": "setBrightness",
+          "value": 10
+        },
+        {
+          "deviceId": "device2",
+          "action": "setPower",
+          "value": true
+        },
+        {
+          "deviceId": "device3",
+          "action": "setPower",
+          "value": true
+        },
+        {
+          "deviceId": "device3",
+          "action": "setVolume",
+          "value": 60
+        },
+        {
+          "deviceId": "device12",
+          "action": "setPosition",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": "scene2",
+      "name": "Dinner Time",
+      "icon": "🍽️",
+      "createdBy": "user1",
+      "createdAt": "2025-02-12T18:45:00.000Z",
+      "updatedAt": "2025-04-10T19:20:22.456Z",
+      "actions": [
+        {
+          "deviceId": "device4",
+          "action": "setPower",
+          "value": true
+        },
+        {
+          "deviceId": "device4",
+          "action": "setBrightness",
+          "value": 80
+        },
+        {
+          "deviceId": "device1",
+          "action": "setPower",
+          "value": true
+        },
+        {
+          "deviceId": "device1",
+          "action": "setBrightness",
+          "value": 60
+        },
+        {
+          "deviceId": "device3",
+          "action": "setPower",
+          "value": true
+        },
+        {
+          "deviceId": "device3",
+          "action": "setVolume",
+          "value": 40
+        },
+        {
+          "deviceId": "device3",
+          "action": "setPlaylist",
+          "value": "Dinner Jazz"
+        }
+      ]
+    },
+    {
+      "id": "scene3",
+      "name": "Work From Home",
+      "icon": "💻",
+      "createdBy": "user1",
+      "createdAt": "2025-02-15T08:30:00.000Z",
+      "updatedAt": "2025-04-12T09:15:22.456Z",
+      "actions": [
+        {
+          "deviceId": "device15",
+          "action": "setPower",
+          "value": true
+        },
+        {
+          "deviceId": "device15",
+          "action": "setBrightness",
+          "value": 100
+        },
+        {
+          "deviceId": "device15",
+          "action": "setColorTemperature",
+          "value": 4000
+        },
+        {
+          "deviceId": "device16",
+          "action": "setPower",
+          "value": true
+        },
+        {
+          "deviceId": "device16",
+          "action": "setTemperature",
+          "value": 72
+        },
+        {
+          "deviceId": "device21",
+          "action": "setPosition",
+          "value": 80
+        }
+      ]
+    }
+  ],
+  "automations": [
+    {
+      "id": "automation1",
+      "name": "Turn off lights when no one is home",
+      "icon": "💡",
+      "active": true,
+      "createdBy": "user1",
+      "createdAt": "2025-03-01T14:30:00.000Z",
+      "updatedAt": "2025-04-15T10:25:22.456Z",
+      "trigger": {
+        "type": "presence",
+        "event": "everyone_leaves"
+      },
+      "conditions": [
+        {
+          "type": "time",
+          "operator": "between",
+          "start": "06:00",
+          "end": "22:00"
+        }
+      ],
+      "actions": [
+        {
+          "deviceId": "group1",
+          "action": "setPower",
+          "value": false
+        }
+      ],
+      "lastRun": "2025-05-08T08:15:22.456Z"
+    },
+    {
+      "id": "automation2",
+      "name": "Adjust thermostat based on outside temperature",
+      "icon": "🌡️",
+      "active": true,
+      "createdBy": "user1",
+      "createdAt": "2025-03-05T16:45:00.000Z",
+      "updatedAt": "2025-04-16T11:30:22.456Z",
+      "trigger": {
+        "type": "weather",
+        "event": "temperature_change",
+        "threshold": 5
+      },
+      "conditions": [
+        {
+          "type": "presence",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "type": "weather",
+          "property": "temperature",
+          "operator": "greater_than",
+          "value": 78
+        }
+      ],
+      "actions": [
+        {
+          "deviceId": "group2",
+          "action": "setTemperature",
+          "value": 74
+        }
+      ],
+      "lastRun": "2025-05-07T14:45:22.456Z"
+    },
+    {
+      "id": "automation3",
+      "name": "Security notification",
+      "icon": "🔔",
+      "active": true,
+      "createdBy": "user1",
+      "createdAt": "2025-03-10T12:15:00.000Z",
+      "updatedAt": "2025-04-18T13:40:22.456Z",
+      "trigger": {
+        "type": "device",
+        "deviceId": "device24",
+        "event": "motion_detected"
+      },
+      "conditions": [
+        {
+          "type": "presence",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "type": "security",
+          "property": "armed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "actions": [
+        {
+          "type": "notification",
+          "recipients": ["user1", "user2"],
+          "message": "Motion detected outside while no one is home",
+          "priority": "high"
+        },
+        {
+          "deviceId": "device24",
+          "action": "startRecording",
+          "duration": 120
+        },
+        {
+          "deviceId": "device22",
+          "action": "setPower",
+          "value": true
+        },
+        {
+          "deviceId": "device22",
+          "action": "setBrightness",
+          "value": 100
+        }
+      ],
+      "lastRun": null
+    }
+  ]
+}

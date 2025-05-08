@@ -1,0 +1,317 @@
+{
+  "current": {
+    "temperature": 72,
+    "feelsLike": 74,
+    "humidity": 45,
+    "windSpeed": 5,
+    "windDirection": "NW",
+    "pressure": 1015,
+    "uvIndex": 5,
+    "visibility": 10,
+    "condition": "sunny",
+    "icon": "sun",
+    "lastUpdated": "2025-05-08T10:15:22.456Z"
+  },
+  "forecast": {
+    "daily": [
+      {
+        "date": "2025-05-08",
+        "day": "Today",
+        "sunrise": "05:48",
+        "sunset": "20:12",
+        "tempHigh": 75,
+        "tempLow": 62,
+        "humidity": 45,
+        "windSpeed": 5,
+        "windDirection": "NW",
+        "condition": "sunny",
+        "icon": "sun",
+        "precipProbability": 0,
+        "precipAmount": 0
+      },
+      {
+        "date": "2025-05-09",
+        "day": "Tomorrow",
+        "sunrise": "05:47",
+        "sunset": "20:13",
+        "tempHigh": 77,
+        "tempLow": 63,
+        "humidity": 48,
+        "windSpeed": 6,
+        "windDirection": "W",
+        "condition": "partly_cloudy",
+        "icon": "cloud-sun",
+        "precipProbability": 10,
+        "precipAmount": 0
+      },
+      {
+        "date": "2025-05-10",
+        "day": "Saturday",
+        "sunrise": "05:46",
+        "sunset": "20:14",
+        "tempHigh": 74,
+        "tempLow": 64,
+        "humidity": 52,
+        "windSpeed": 8,
+        "windDirection": "SW",
+        "condition": "partly_cloudy",
+        "icon": "cloud-sun",
+        "precipProbability": 20,
+        "precipAmount": 0
+      },
+      {
+        "date": "2025-05-11",
+        "day": "Sunday",
+        "sunrise": "05:45",
+        "sunset": "20:15",
+        "tempHigh": 70,
+        "tempLow": 62,
+        "humidity": 65,
+        "windSpeed": 10,
+        "windDirection": "S",
+        "condition": "cloudy",
+        "icon": "cloud",
+        "precipProbability": 30,
+        "precipAmount": 0
+      },
+      {
+        "date": "2025-05-12",
+        "day": "Monday",
+        "sunrise": "05:44",
+        "sunset": "20:16",
+        "tempHigh": 68,
+        "tempLow": 60,
+        "humidity": 75,
+        "windSpeed": 12,
+        "windDirection": "S",
+        "condition": "rain",
+        "icon": "cloud-rain",
+        "precipProbability": 80,
+        "precipAmount": 0.25
+      },
+      {
+        "date": "2025-05-13",
+        "day": "Tuesday",
+        "sunrise": "05:43",
+        "sunset": "20:17",
+        "tempHigh": 65,
+        "tempLow": 58,
+        "humidity": 80,
+        "windSpeed": 15,
+        "windDirection": "SE",
+        "condition": "rain",
+        "icon": "cloud-rain",
+        "precipProbability": 90,
+        "precipAmount": 0.5
+      },
+      {
+        "date": "2025-05-14",
+        "day": "Wednesday",
+        "sunrise": "05:42",
+        "sunset": "20:18",
+        "tempHigh": 70,
+        "tempLow": 60,
+        "humidity": 70,
+        "windSpeed": 8,
+        "windDirection": "W",
+        "condition": "partly_cloudy",
+        "icon": "cloud-sun",
+        "precipProbability": 40,
+        "precipAmount": 0.1
+      }
+    ],
+    "hourly": [
+      {
+        "time": "10:00",
+        "temperature": 70,
+        "feelsLike": 70,
+        "humidity": 48,
+        "windSpeed": 4,
+        "windDirection": "NW",
+        "condition": "sunny",
+        "icon": "sun",
+        "precipProbability": 0
+      },
+      {
+        "time": "11:00",
+        "temperature": 72,
+        "feelsLike": 72,
+        "humidity": 45,
+        "windSpeed": 5,
+        "windDirection": "NW",
+        "condition": "sunny",
+        "icon": "sun",
+        "precipProbability": 0
+      },
+      {
+        "time": "12:00",
+        "temperature": 74,
+        "feelsLike": 74,
+        "humidity": 42,
+        "windSpeed": 6,
+        "windDirection": "W",
+        "condition": "sunny",
+        "icon": "sun",
+        "precipProbability": 0
+      },
+      {
+        "time": "13:00",
+        "temperature": 75,
+        "feelsLike": 75,
+        "humidity": 40,
+        "windSpeed": 6,
+        "windDirection": "W",
+        "condition": "sunny",
+        "icon": "sun",
+        "precipProbability": 0
+      },
+      {
+        "time": "14:00",
+        "temperature": 75,
+        "feelsLike": 75,
+        "humidity": 40,
+        "windSpeed": 7,
+        "windDirection": "W",
+        "condition": "sunny",
+        "icon": "sun",
+        "precipProbability": 0
+      },
+      {
+        "time": "15:00",
+        "temperature": 74,
+        "feelsLike": 74,
+        "humidity": 42,
+        "windSpeed": 7,
+        "windDirection": "W",
+        "condition": "sunny",
+        "icon": "sun",
+        "precipProbability": 0
+      },
+      {
+        "time": "16:00",
+        "temperature": 73,
+        "feelsLike": 73,
+        "humidity": 45,
+        "windSpeed": 6,
+        "windDirection": "W",
+        "condition": "sunny",
+        "icon": "sun",
+        "precipProbability": 0
+      },
+      {
+        "time": "17:00",
+        "temperature": 72,
+        "feelsLike": 72,
+        "humidity": 48,
+        "windSpeed": 5,
+        "windDirection": "W",
+        "condition": "sunny",
+        "icon": "sun",
+        "precipProbability": 0
+      },
+      {
+        "time": "18:00",
+        "temperature": 70,
+        "feelsLike": 70,
+        "humidity": 50,
+        "windSpeed": 4,
+        "windDirection": "W",
+        "condition": "sunny",
+        "icon": "sun",
+        "precipProbability": 0
+      },
+      {
+        "time": "19:00",
+        "temperature": 68,
+        "feelsLike": 68,
+        "humidity": 55,
+        "windSpeed": 3,
+        "windDirection": "W",
+        "condition": "clear",
+        "icon": "sun",
+        "precipProbability": 0
+      },
+      {
+        "time": "20:00",
+        "temperature": 65,
+        "feelsLike": 65,
+        "humidity": 60,
+        "windSpeed": 2,
+        "windDirection": "W",
+        "condition": "clear",
+        "icon": "moon",
+        "precipProbability": 0
+      },
+      {
+        "time": "21:00",
+        "temperature": 64,
+        "feelsLike": 64,
+        "humidity": 62,
+        "windSpeed": 2,
+        "windDirection": "W",
+        "condition": "clear",
+        "icon": "moon",
+        "precipProbability": 0
+      },
+      {
+        "time": "22:00",
+        "temperature": 63,
+        "feelsLike": 63,
+        "humidity": 65,
+        "windSpeed": 2,
+        "windDirection": "W",
+        "condition": "clear",
+        "icon": "moon",
+        "precipProbability": 0
+      },
+      {
+        "time": "23:00",
+        "temperature": 62,
+        "feelsLike": 62,
+        "humidity": 68,
+        "windSpeed": 2,
+        "windDirection": "W",
+        "condition": "clear",
+        "icon": "moon",
+        "precipProbability": 0
+      },
+      {
+        "time": "00:00",
+        "temperature": 62,
+        "feelsLike": 62,
+        "humidity": 70,
+        "windSpeed": 2,
+        "windDirection": "W",
+        "condition": "clear",
+        "icon": "moon",
+        "precipProbability": 0
+      }
+    ]
+  },
+  "alerts": [
+    {
+      "id": "alert1",
+      "type": "weather_advisory",
+      "severity": "moderate",
+      "title": "Wind Advisory",
+      "message": "A wind advisory is in effect for your area on Monday. Winds may gust up to 45mph.",
+      "timeStart": "2025-05-12T08:00:00.000Z",
+      "timeEnd": "2025-05-12T20:00:00.000Z",
+      "impactedAreas": ["Tech City", "Nearby County"]
+    }
+  ],
+  "airQuality": {
+    "aqi": 35,
+    "category": "good",
+    "pollutants": {
+      "pm2_5": 8.2,
+      "pm10": 12.5,
+      "o3": 0.03,
+      "no2": 0.01,
+      "so2": 0.002,
+      "co": 0.2
+    },
+    "healthImplications": "Air quality is satisfactory, and air pollution poses little or no risk.",
+    "lastUpdated": "2025-05-08T10:00:22.456Z"
+  }
+}

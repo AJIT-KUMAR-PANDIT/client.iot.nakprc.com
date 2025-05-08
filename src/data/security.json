@@ -1,0 +1,356 @@
+{
+  "securitySystem": {
+    "status": "armed",
+    "mode": "armed_home",
+    "zones": [
+      {
+        "id": "zone1",
+        "name": "Perimeter",
+        "status": "armed",
+        "type": "perimeter",
+        "triggeredBy": ["frontDoor", "backDoor", "garageDoor", "windows"]
+      },
+      {
+        "id": "zone2",
+        "name": "Interior",
+        "status": "disarmed",
+        "type": "interior",
+        "triggeredBy": ["motionSensors", "breakageDetectors"]
+      },
+      {
+        "id": "zone3",
+        "name": "Exterior",
+        "status": "armed",
+        "type": "exterior",
+        "triggeredBy": ["yardMotion", "drivewayMotion"]
+      }
+    ],
+    "alarmStatus": "inactive",
+    "lastArmed": {
+      "timestamp": "2025-05-08T08:00:22.456Z",
+      "user": "user1",
+      "method": "automatic"
+    },
+    "lastDisarmed": {
+      "timestamp": "2025-05-08T07:45:12.123Z",
+      "user": "user1",
+      "method": "manual"
+    },
+    "allowedUsers": ["user1", "user2", "user3"],
+    "adminUsers": ["user1"],
+    "emergencyContacts": [
+      {
+        "name": "John Doe",
+        "phone": "+1 (555) 123-4567",
+        "relationship": "primary"
+      },
+      {
+        "name": "Jane Smith",
+        "phone": "+1 (555) 987-6543",
+        "relationship": "secondary"
+      }
+    ]
+  },
+  "securityDevices": [
+    {
+      "id": "frontDoor",
+      "name": "Front Door",
+      "type": "door",
+      "status": "locked",
+      "battery": 92,
+      "tampered": false,
+      "lastEvent": "2025-05-08T10:00:22.456Z",
+      "lastEventType": "locked",
+      "lastEventUser": "user1"
+    },
+    {
+      "id": "backDoor",
+      "name": "Back Door",
+      "type": "door",
+      "status": "locked",
+      "battery": 78,
+      "tampered": false,
+      "lastEvent": "2025-05-08T08:15:22.456Z",
+      "lastEventType": "locked",
+      "lastEventUser": "user2"
+    },
+    {
+      "id": "garageDoor",
+      "name": "Garage Door",
+      "type": "door",
+      "status": "locked",
+      "battery": 85,
+      "tampered": false,
+      "lastEvent": "2025-05-08T06:15:22.456Z",
+      "lastEventType": "locked",
+      "lastEventUser": "user1"
+    },
+    {
+      "id": "livingRoomWindow",
+      "name": "Living Room Window",
+      "type": "window",
+      "status": "closed",
+      "battery": 90,
+      "tampered": false,
+      "lastEvent": "2025-05-07T21:30:22.456Z",
+      "lastEventType": "closed",
+      "lastEventUser": "user1"
+    },
+    {
+      "id": "kitchenWindow",
+      "name": "Kitchen Window",
+      "type": "window",
+      "status": "closed",
+      "battery": 95,
+      "tampered": false,
+      "lastEvent": "2025-05-05T18:45:22.456Z",
+      "lastEventType": "closed",
+      "lastEventUser": "user2"
+    },
+    {
+      "id": "motionLivingRoom",
+      "name": "Living Room Motion",
+      "type": "motion",
+      "status": "no_motion",
+      "battery": 88,
+      "tampered": false,
+      "lastEvent": "2025-05-08T10:15:22.456Z",
+      "lastEventType": "motion_detected",
+      "lastEventUser": null
+    },
+    {
+      "id": "motionKitchen",
+      "name": "Kitchen Motion",
+      "type": "motion",
+      "status": "no_motion",
+      "battery": 90,
+      "tampered": false,
+      "lastEvent": "2025-05-08T09:45:22.456Z",
+      "lastEventType": "motion_detected",
+      "lastEventUser": null
+    },
+    {
+      "id": "motionOffice",
+      "name": "Office Motion",
+      "type": "motion",
+      "status": "motion_detected",
+      "battery": 92,
+      "tampered": false,
+      "lastEvent": "2025-05-08T10:20:22.456Z",
+      "lastEventType": "motion_detected",
+      "lastEventUser": null
+    },
+    {
+      "id": "glassBreakLiving",
+      "name": "Living Room Glass Break",
+      "type": "glass_break",
+      "status": "normal",
+      "battery": 85,
+      "tampered": false,
+      "lastEvent": "2025-05-01T15:30:22.456Z",
+      "lastEventType": "test",
+      "lastEventUser": "user1"
+    },
+    {
+      "id": "yardMotion",
+      "name": "Yard Motion",
+      "type": "outdoor_motion",
+      "status": "no_motion",
+      "battery": 80,
+      "tampered": false,
+      "lastEvent": "2025-05-08T09:15:22.456Z",
+      "lastEventType": "motion_detected",
+      "lastEventUser": null
+    },
+    {
+      "id": "drivewayMotion",
+      "name": "Driveway Motion",
+      "type": "outdoor_motion",
+      "status": "no_motion",
+      "battery": 82,
+      "tampered": false,
+      "lastEvent": "2025-05-08T08:00:22.456Z",
+      "lastEventType": "motion_detected",
+      "lastEventUser": null
+    }
+  ],
+  "cameras": [
+    {
+      "id": "device24",
+      "name": "Outdoor Camera",
+      "type": "outdoor",
+      "status": "online",
+      "recording": true,
+      "motionDetection": true,
+      "batteryPowered": true,
+      "battery": 75,
+      "lastEvent": "2025-05-08T09:15:22.456Z",
+      "lastEventType": "motion_detected",
+      "latestSnapshot": "/assets/camera-outdoor.jpg",
+      "storageUsed": {
+        "percent": 45,
+        "recordings": 24,
+        "oldestRecording": "2025-05-01T08:15:22.456Z"
+      }
+    },
+    {
+      "id": "camera2",
+      "name": "Living Room Camera",
+      "type": "indoor",
+      "status": "online",
+      "recording": false,
+      "motionDetection": true,
+      "batteryPowered": false,
+      "battery": null,
+      "lastEvent": "2025-05-08T10:15:22.456Z",
+      "lastEventType": "motion_detected",
+      "latestSnapshot": "/assets/camera-living.jpg",
+      "storageUsed": {
+        "percent": 32,
+        "recordings": 18,
+        "oldestRecording": "2025-05-03T10:45:22.456Z"
+      }
+    },
+    {
+      "id": "camera3",
+      "name": "Kitchen Camera",
+      "type": "indoor",
+      "status": "online",
+      "recording": false,
+      "motionDetection": true,
+      "batteryPowered": false,
+      "battery": null,
+      "lastEvent": "2025-05-08T09:45:22.456Z",
+      "lastEventType": "motion_detected",
+      "latestSnapshot": "/assets/camera-kitchen.jpg",
+      "storageUsed": {
+        "percent": 28,
+        "recordings": 15,
+        "oldestRecording": "2025-05-03T14:30:22.456Z"
+      }
+    },
+    {
+      "id": "camera4",
+      "name": "Garage Camera",
+      "type": "indoor",
+      "status": "offline",
+      "recording": false,
+      "motionDetection": true,
+      "batteryPowered": false,
+      "battery": null,
+      "lastEvent": "2025-05-07T18:30:22.456Z",
+      "lastEventType": "offline",
+      "latestSnapshot": "/assets/camera-garage.jpg",
+      "storageUsed": {
+        "percent": 15,
+        "recordings": 8,
+        "oldestRecording": "2025-05-05T12:15:22.456Z"
+      }
+    }
+  ],
+  "recentActivity": [
+    {
+      "id": "act1",
+      "event": "Front Door Unlocked",
+      "time": "2025-05-08T10:24:15.456Z",
+      "device": "frontDoor",
+      "user": "user1",
+      "category": "access"
+    },
+    {
+      "id": "act2",
+      "event": "Motion Detected - Backyard",
+      "time": "2025-05-08T09:15:22.456Z",
+      "device": "device24",
+      "user": null,
+      "category": "motion"
+    },
+    {
+      "id": "act3",
+      "event": "Security System Armed",
+      "time": "2025-05-08T08:00:22.456Z",
+      "device": "securitySystem",
+      "user": "user1",
+      "category": "security"
+    },
+    {
+      "id": "act4",
+      "event": "Front Door Locked",
+      "time": "2025-05-08T08:00:15.456Z",
+      "device": "frontDoor",
+      "user": "user1",
+      "category": "access"
+    },
+    {
+      "id": "act5",
+      "event": "Security System Disarmed",
+      "time": "2025-05-08T07:45:12.123Z",
+      "device": "securitySystem",
+      "user": "user1",
+      "category": "security"
+    },
+    {
+      "id": "act6",
+      "event": "Motion Detected - Living Room",
+      "time": "2025-05-08T07:30:22.456Z",
+      "device": "motionLivingRoom",
+      "user": null,
+      "category": "motion"
+    },
+    {
+      "id": "act7",
+      "event": "Front Door Unlocked",
+      "time": "2025-05-08T07:30:15.456Z",
+      "device": "frontDoor",
+      "user": "user1",
+      "category": "access"
+    },
+    {
+      "id": "act8",
+      "event": "Garage Door Opened",
+      "time": "2025-05-07T18:45:22.456Z",
+      "device": "garageDoor",
+      "user": "user2",
+      "category": "access"
+    },
+    {
+      "id": "act9",
+      "event": "Back Door Unlocked",
+      "time": "2025-05-07T18:15:22.456Z",
+      "device": "backDoor",
+      "user": "user2",
+      "category": "access"
+    },
+    {
+      "id": "act10",
+      "event": "Security System Disarmed",
+      "time": "2025-05-07T18:10:22.456Z",
+      "device": "securitySystem",
+      "user": "user2",
+      "category": "security"
+    }
+  ],
+  "emergencyServices": [
+    {
+      "id": "emergency1",
+      "name": "Police",
+      "phone": "911",
+      "address": "125 Main St, Tech City, CA 94024",
+      "estimatedResponseTime": "5-10 minutes"
+    },
+    {
+      "id": "emergency2",
+      "name": "Fire Department",
+      "phone": "911",
+      "address": "200 Oak Ave, Tech City, CA 94024",
+      "estimatedResponseTime": "5-10 minutes"
+    },
+    {
+      "id": "emergency3",
+      "name": "Medical Emergency",
+      "phone": "911",
+      "address": "300 Hospital Dr, Tech City, CA 94024",
+      "estimatedResponseTime": "8-12 minutes"
+    }
+  ]
+}

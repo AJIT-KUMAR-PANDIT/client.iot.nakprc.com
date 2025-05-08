@@ -1,0 +1,197 @@
+{
+  "general": {
+    "theme": {
+      "mode": "system",
+      "primaryColor": "#3b82f6",
+      "secondaryColor": "#10b981",
+      "accentColor": "#f59e0b"
+    },
+    "language": "en",
+    "region": "us",
+    "units": {
+      "temperature": "fahrenheit",
+      "distance": "miles",
+      "time": "12h",
+      "currency": "USD"
+    },
+    "startup": {
+      "defaultView": "dashboard",
+      "startOnBoot": false,
+      "startMinimized": false
+    },
+    "accessibility": {
+      "largeText": false,
+      "highContrast": false,
+      "screenReader": false,
+      "reduceMotion": false
+    }
+  },
+  "connectivity": {
+    "wifi": {
+      "ssid": "HomeNetwork",
+      "signal": "excellent",
+      "ipAddress": "192.168.1.1",
+      "macAddress": "00:1A:2B:3C:4D:5E",
+      "channel": 6,
+      "frequency": "2.4GHz",
+      "securityType": "WPA2"
+    },
+    "bluetooth": {
+      "enabled": true,
+      "visible": false,
+      "pairedDevices": 5
+    },
+    "zigbee": {
+      "enabled": true,
+      "channel": 15,
+      "panId": "0x1234",
+      "devices": 12
+    },
+    "zwave": {
+      "enabled": true,
+      "homeId": "0x12345678",
+      "devices": 5
+    },
+    "cloud": {
+      "connected": true,
+      "accountLinked": true,
+      "lastSync": "2025-05-08T10:00:22.456Z"
+    }
+  },
+  "security": {
+    "loginProtection": {
+      "requirePin": true,
+      "biometricEnabled": true,
+      "twoFactorAuth": true,
+      "autoLockTimeout": 10
+    },
+    "deviceProtection": {
+      "encryptedCommunication": true,
+      "localControlOnly": false,
+      "restrictGuestAccess": true
+    },
+    "dataProtection": {
+      "localDataStorage": true,
+      "dataRetentionPeriod": 30,
+      "anonymizeUsageData": true,
+      "shareAnalytics": false
+    },
+    "networkProtection": {
+      "firewallEnabled": true,
+      "malwareProtection": true,
+      "ddosProtection": true,
+      "deviceIsolation": false
+    }
+  },
+  "updates": {
+    "system": {
+      "currentVersion": "2.5.2",
+      "latestVersion": "2.5.3",
+      "updateAvailable": true,
+      "lastChecked": "2025-05-08T10:00:22.456Z",
+      "autoUpdate": true,
+      "updateChannel": "stable"
+    },
+    "devices": {
+      "autoUpdate": true,
+      "updateSchedule": "overnight",
+      "pendingUpdates": 2
+    }
+  },
+  "connectedServices": [
+    {
+      "id": "alexa",
+      "name": "Amazon Alexa",
+      "connected": true,
+      "lastSynced": "2025-05-08T09:30:22.456Z",
+      "permissions": ["query", "control", "notifications"]
+    },
+    {
+      "id": "googleHome",
+      "name": "Google Home",
+      "connected": true,
+      "lastSynced": "2025-05-08T09:30:22.456Z",
+      "permissions": ["query", "control", "notifications"]
+    },
+    {
+      "id": "appleHomeKit",
+      "name": "Apple HomeKit",
+      "connected": false,
+      "lastSynced": null,
+      "permissions": []
+    },
+    {
+      "id": "spotify",
+      "name": "Spotify",
+      "connected": true,
+      "lastSynced": "2025-05-08T09:30:22.456Z",
+      "permissions": ["query", "control"]
+    },
+    {
+      "id": "nest",
+      "name": "Nest",
+      "connected": true,
+      "lastSynced": "2025-05-08T09:30:22.456Z",
+      "permissions": ["query", "control"]
+    }
+  ],
+  "backup": {
+    "autoBackup": true,
+    "backupLocation": "cloud",
+    "backupFrequency": "weekly",
+    "lastBackup": "2025-05-01T10:00:22.456Z",
+    "availableBackups": [
+      {
+        "id": "backup1",
+        "date": "2025-05-01T10:00:22.456Z",
+        "size": "4.2 MB",
+        "version": "2.5.2"
+      },
+      {
+        "id": "backup2",
+        "date": "2025-04-24T10:00:22.456Z",
+        "size": "4.1 MB",
+        "version": "2.5.1"
+      },
+      {
+        "id": "backup3",
+        "date": "2025-04-17T10:00:22.456Z",
+        "size": "4.1 MB",
+        "version": "2.5.0"
+      }
+    ]
+  },
+  "advanced": {
+    "developerMode": false,
+    "debugLogging": false,
+    "apiAccess": false,
+    "localApi": {
+      "enabled": false,
+      "port": 8123,
+      "authRequired": true
+    },
+    "experimentalFeatures": false
+  },
+  "about": {
+    "systemName": "SmartHome Hub",
+    "version": "2.5.2",
+    "buildNumber": "25214",
+    "buildDate": "2025-04-20",
+    "manufacturer": "Smart Systems Inc.",
+    "deviceModel": "HomeHub Pro",
+    "operatingSystem": "HomeOS 12.3",
+    "processor": "Quad Core 2.0GHz",
+    "memory": "4 GB",
+    "storage": {
+      "total": "64 GB",
+      "used": "23.5 GB",
+      "free": "40.5 GB"
+    },
+    "uptime": "15 days 6 hours",
+    "license": {
+      "type": "Premium",
+      "validUntil": "2026-05-08T10:00:22.456Z",
+      "features": ["cloud_storage", "ai_assistant", "advanced_automation", "video_analytics"]
+    }
+  }
+}

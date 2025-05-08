@@ -1,0 +1,308 @@
+{
+  "notifications": [
+    {
+      "id": "notif1",
+      "title": "Motion Detected",
+      "message": "Motion detected by Outdoor Camera",
+      "type": "security",
+      "priority": "high",
+      "timestamp": "2025-05-08T09:15:22.456Z",
+      "read": false,
+      "actionRequired": true,
+      "relatedDeviceId": "device24",
+      "relatedEvent": "motion_detected",
+      "actions": [
+        {
+          "label": "View Camera",
+          "action": "viewCamera",
+          "deviceId": "device24"
+        },
+        {
+          "label": "Dismiss",
+          "action": "dismiss"
+        }
+      ]
+    },
+    {
+      "id": "notif2",
+      "title": "Energy Usage Alert",
+      "message": "Your home is using more energy than usual (30% higher)",
+      "type": "energy",
+      "priority": "medium",
+      "timestamp": "2025-05-08T08:30:22.456Z",
+      "read": false,
+      "actionRequired": false,
+      "relatedDeviceId": null,
+      "relatedEvent": "energy_spike",
+      "actions": [
+        {
+          "label": "View Details",
+          "action": "viewEnergy"
+        },
+        {
+          "label": "Dismiss",
+          "action": "dismiss"
+        }
+      ]
+    },
+    {
+      "id": "notif3",
+      "title": "Security System Armed",
+      "message": "Security system successfully armed in 'Home' mode",
+      "type": "security",
+      "priority": "low",
+      "timestamp": "2025-05-08T08:00:22.456Z",
+      "read": true,
+      "actionRequired": false,
+      "relatedDeviceId": "securitySystem",
+      "relatedEvent": "system_armed",
+      "actions": [
+        {
+          "label": "Dismiss",
+          "action": "dismiss"
+        }
+      ]
+    },
+    {
+      "id": "notif4",
+      "title": "Office AC Filter",
+      "message": "Time to replace Office AC filter",
+      "type": "maintenance",
+      "priority": "medium",
+      "timestamp": "2025-05-07T15:15:22.456Z",
+      "read": false,
+      "actionRequired": true,
+      "relatedDeviceId": "device16",
+      "relatedEvent": "filter_change",
+      "actions": [
+        {
+          "label": "Order Filter",
+          "action": "orderPart",
+          "partNumber": "AC-FILTER-123"
+        },
+        {
+          "label": "Mark Complete",
+          "action": "markComplete"
+        },
+        {
+          "label": "Dismiss",
+          "action": "dismiss"
+        }
+      ]
+    },
+    {
+      "id": "notif5",
+      "title": "Living Room Lights Left On",
+      "message": "Living Room Lights have been on for 8 hours",
+      "type": "energy",
+      "priority": "low",
+      "timestamp": "2025-05-07T14:30:22.456Z",
+      "read": true,
+      "actionRequired": true,
+      "relatedDeviceId": "device1",
+      "relatedEvent": "device_on_long",
+      "actions": [
+        {
+          "label": "Turn Off",
+          "action": "controlDevice",
+          "deviceId": "device1",
+          "command": "setPower",
+          "value": false
+        },
+        {
+          "label": "Dismiss",
+          "action": "dismiss"
+        }
+      ]
+    },
+    {
+      "id": "notif6",
+      "title": "Software Update Available",
+      "message": "New system update available (v2.5.3)",
+      "type": "system",
+      "priority": "medium",
+      "timestamp": "2025-05-07T10:15:22.456Z",
+      "read": true,
+      "actionRequired": true,
+      "relatedDeviceId": null,
+      "relatedEvent": "system_update",
+      "actions": [
+        {
+          "label": "Update Now",
+          "action": "systemUpdate"
+        },
+        {
+          "label": "Later",
+          "action": "dismiss"
+        }
+      ]
+    },
+    {
+      "id": "notif7",
+      "title": "New Device Detected",
+      "message": "New device detected on your network: 'Samsung TV'",
+      "type": "system",
+      "priority": "medium",
+      "timestamp": "2025-05-06T19:15:22.456Z",
+      "read": true,
+      "actionRequired": true,
+      "relatedDeviceId": null,
+      "relatedEvent": "new_device",
+      "actions": [
+        {
+          "label": "Setup Device",
+          "action": "setupDevice"
+        },
+        {
+          "label": "Ignore",
+          "action": "ignore"
+        }
+      ]
+    },
+    {
+      "id": "notif8",
+      "title": "Battery Low",
+      "message": "Back Door lock battery is low (15%)",
+      "type": "maintenance",
+      "priority": "high",
+      "timestamp": "2025-05-06T16:45:22.456Z",
+      "read": true,
+      "actionRequired": true,
+      "relatedDeviceId": "backDoor",
+      "relatedEvent": "battery_low",
+      "actions": [
+        {
+          "label": "Order Battery",
+          "action": "orderPart",
+          "partNumber": "BAT-CR123A"
+        },
+        {
+          "label": "Dismiss",
+          "action": "dismiss"
+        }
+      ]
+    },
+    {
+      "id": "notif9",
+      "title": "Weekly Energy Report",
+      "message": "Your energy usage was 5% lower than last week",
+      "type": "energy",
+      "priority": "low",
+      "timestamp": "2025-05-06T10:00:00.000Z",
+      "read": true,
+      "actionRequired": false,
+      "relatedDeviceId": null,
+      "relatedEvent": "energy_report",
+      "actions": [
+        {
+          "label": "View Report",
+          "action": "viewEnergy"
+        },
+        {
+          "label": "Dismiss",
+          "action": "dismiss"
+        }
+      ]
+    },
+    {
+      "id": "notif10",
+      "title": "Guest Access Granted",
+      "message": "Guest access granted to Alex Johnson",
+      "type": "access",
+      "priority": "medium",
+      "timestamp": "2025-05-05T14:30:00.000Z",
+      "read": true,
+      "actionRequired": false,
+      "relatedDeviceId": null,
+      "relatedEvent": "access_granted",
+      "actions": [
+        {
+          "label": "Review Access",
+          "action": "reviewAccess"
+        },
+        {
+          "label": "Dismiss",
+          "action": "dismiss"
+        }
+      ]
+    }
+  ],
+  "notificationSettings": {
+    "categories": [
+      {
+        "id": "security",
+        "name": "Security",
+        "enabled": true,
+        "priority": "high",
+        "methods": {
+          "push": true,
+          "email": true,
+          "sms": true
+        }
+      },
+      {
+        "id": "energy",
+        "name": "Energy",
+        "enabled": true,
+        "priority": "medium",
+        "methods": {
+          "push": true,
+          "email": true,
+          "sms": false
+        }
+      },
+      {
+        "id": "maintenance",
+        "name": "Maintenance",
+        "enabled": true,
+        "priority": "medium",
+        "methods": {
+          "push": true,
+          "email": true,
+          "sms": false
+        }
+      },
+      {
+        "id": "system",
+        "name": "System",
+        "enabled": true,
+        "priority": "medium",
+        "methods": {
+          "push": true,
+          "email": true,
+          "sms": false
+        }
+      },
+      {
+        "id": "access",
+        "name": "Access",
+        "enabled": true,
+        "priority": "high",
+        "methods": {
+          "push": true,
+          "email": true,
+          "sms": true
+        }
+      },
+      {
+        "id": "tips",
+        "name": "Tips & Suggestions",
+        "enabled": false,
+        "priority": "low",
+        "methods": {
+          "push": false,
+          "email": false,
+          "sms": false
+        }
+      }
+    ],
+    "doNotDisturb": {
+      "enabled": true,
+      "startTime": "22:00",
+      "endTime": "07:00",
+      "overrideForPriority": "high",
+      "daysActive": ["monday", "tuesday", "wednesday", "thursday", "friday"]
+    }
+  },
+  "unreadCount": 3
+}

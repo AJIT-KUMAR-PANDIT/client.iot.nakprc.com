@@ -1,0 +1,688 @@
+{
+  "devices": [
+    {
+      "id": "device1",
+      "name": "Living Room Lights",
+      "type": "light",
+      "subType": "ceiling",
+      "manufacturer": "Phillips Hue",
+      "model": "White and Color Ambiance",
+      "firmwareVersion": "1.55.7",
+      "roomId": "room1",
+      "icon": "💡",
+      "state": {
+        "power": true,
+        "brightness": 80,
+        "colorTemperature": 3500,
+        "color": null,
+        "lastChanged": "2025-05-08T10:12:15.123Z"
+      },
+      "capabilities": ["power", "brightness", "colorTemperature", "color", "scene"],
+      "connectivity": {
+        "protocol": "zigbee",
+        "ipAddress": null,
+        "signalStrength": "excellent",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device2",
+      "name": "Living Room TV",
+      "type": "entertainment",
+      "subType": "television",
+      "manufacturer": "Samsung",
+      "model": "QN90C Neo QLED",
+      "firmwareVersion": "2.4.16",
+      "roomId": "room1",
+      "icon": "📺",
+      "state": {
+        "power": false,
+        "volume": 35,
+        "channel": null,
+        "input": "HDMI 1",
+        "lastChanged": "2025-05-07T22:15:30.789Z"
+      },
+      "capabilities": ["power", "volume", "channel", "input", "app"],
+      "connectivity": {
+        "protocol": "wifi",
+        "ipAddress": "192.168.1.105",
+        "signalStrength": "good",
+        "online": true,
+        "lastSeen": "2025-05-08T08:45:12.123Z"
+      }
+    },
+    {
+      "id": "device3",
+      "name": "Living Room Speaker",
+      "type": "audio",
+      "subType": "smartSpeaker",
+      "manufacturer": "Sonos",
+      "model": "One",
+      "firmwareVersion": "64.3.6180",
+      "roomId": "room1",
+      "icon": "🔊",
+      "state": {
+        "power": true,
+        "volume": 45,
+        "playing": false,
+        "track": null,
+        "groupedWith": [],
+        "lastChanged": "2025-05-08T09:30:45.456Z"
+      },
+      "capabilities": ["power", "volume", "playback", "group", "voice"],
+      "connectivity": {
+        "protocol": "wifi",
+        "ipAddress": "192.168.1.110",
+        "signalStrength": "excellent",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device4",
+      "name": "Kitchen Lights",
+      "type": "light",
+      "subType": "spotlight",
+      "manufacturer": "Phillips Hue",
+      "model": "White and Color Ambiance",
+      "firmwareVersion": "1.55.7",
+      "roomId": "room2",
+      "icon": "💡",
+      "state": {
+        "power": false,
+        "brightness": 0,
+        "colorTemperature": 3000,
+        "color": null,
+        "lastChanged": "2025-05-08T08:30:00.123Z"
+      },
+      "capabilities": ["power", "brightness", "colorTemperature", "color", "scene"],
+      "connectivity": {
+        "protocol": "zigbee",
+        "ipAddress": null,
+        "signalStrength": "excellent",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device5",
+      "name": "Refrigerator",
+      "type": "appliance",
+      "subType": "refrigerator",
+      "manufacturer": "LG",
+      "model": "SmartThings Compatible Fridge",
+      "firmwareVersion": "3.6.2",
+      "roomId": "room2",
+      "icon": "❄️",
+      "state": {
+        "power": true,
+        "temperature": 37,
+        "freezerTemperature": 0,
+        "openDoor": false,
+        "waterFilter": "good",
+        "lastChanged": "2025-05-08T10:15:22.456Z"
+      },
+      "capabilities": ["temperature", "notification", "energyMonitoring"],
+      "connectivity": {
+        "protocol": "wifi",
+        "ipAddress": "192.168.1.115",
+        "signalStrength": "good",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device6",
+      "name": "Coffee Maker",
+      "type": "appliance",
+      "subType": "coffeeMaker",
+      "manufacturer": "Keurig",
+      "model": "K-Elite",
+      "firmwareVersion": "2.1.0",
+      "roomId": "room2",
+      "icon": "☕",
+      "state": {
+        "power": false,
+        "waterLevel": 75,
+        "brewing": false,
+        "scheduled": {
+          "active": true,
+          "time": "06:30"
+        },
+        "lastChanged": "2025-05-08T07:15:22.456Z"
+      },
+      "capabilities": ["power", "brew", "schedule"],
+      "connectivity": {
+        "protocol": "wifi",
+        "ipAddress": "192.168.1.120",
+        "signalStrength": "good",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device7",
+      "name": "Dishwasher",
+      "type": "appliance",
+      "subType": "dishwasher",
+      "manufacturer": "Bosch",
+      "model": "800 Series",
+      "firmwareVersion": "1.4.2",
+      "roomId": "room2",
+      "icon": "🍽️",
+      "state": {
+        "power": true,
+        "running": false,
+        "mode": "normal",
+        "timeRemaining": 0,
+        "lastChanged": "2025-05-07T21:45:22.456Z"
+      },
+      "capabilities": ["power", "cycleControl", "notification", "energyMonitoring"],
+      "connectivity": {
+        "protocol": "wifi",
+        "ipAddress": "192.168.1.125",
+        "signalStrength": "fair",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device8",
+      "name": "Bedroom Lights",
+      "type": "light",
+      "subType": "ceiling",
+      "manufacturer": "Phillips Hue",
+      "model": "White and Color Ambiance",
+      "firmwareVersion": "1.55.7",
+      "roomId": "room3",
+      "icon": "💡",
+      "state": {
+        "power": false,
+        "brightness": 0,
+        "colorTemperature": 2700,
+        "color": null,
+        "lastChanged": "2025-05-08T06:45:22.456Z"
+      },
+      "capabilities": ["power", "brightness", "colorTemperature", "color", "scene"],
+      "connectivity": {
+        "protocol": "zigbee",
+        "ipAddress": null,
+        "signalStrength": "excellent",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device9",
+      "name": "Bedroom TV",
+      "type": "entertainment",
+      "subType": "television",
+      "manufacturer": "LG",
+      "model": "OLED C3",
+      "firmwareVersion": "05.30.40",
+      "roomId": "room3",
+      "icon": "📺",
+      "state": {
+        "power": false,
+        "volume": 25,
+        "channel": null,
+        "input": "HDMI 2",
+        "lastChanged": "2025-05-07T23:30:22.456Z"
+      },
+      "capabilities": ["power", "volume", "channel", "input", "app"],
+      "connectivity": {
+        "protocol": "wifi",
+        "ipAddress": "192.168.1.130",
+        "signalStrength": "good",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device10",
+      "name": "Living Room AC",
+      "type": "climate",
+      "subType": "airConditioner",
+      "manufacturer": "Daikin",
+      "model": "FTXM Series",
+      "firmwareVersion": "3.1.5",
+      "roomId": "room1",
+      "icon": "❄️",
+      "state": {
+        "power": true,
+        "mode": "cool",
+        "temperature": 72,
+        "fanSpeed": "auto",
+        "swingMode": "off",
+        "lastChanged": "2025-05-08T09:15:22.456Z"
+      },
+      "capabilities": ["power", "temperature", "mode", "fanSpeed", "swing", "schedule"],
+      "connectivity": {
+        "protocol": "wifi",
+        "ipAddress": "192.168.1.135",
+        "signalStrength": "good",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device11",
+      "name": "Bedroom AC",
+      "type": "climate",
+      "subType": "airConditioner",
+      "manufacturer": "Daikin",
+      "model": "FTXM Series",
+      "firmwareVersion": "3.1.5",
+      "roomId": "room3",
+      "icon": "❄️",
+      "state": {
+        "power": true,
+        "mode": "cool",
+        "temperature": 68,
+        "fanSpeed": "low",
+        "swingMode": "off",
+        "lastChanged": "2025-05-08T06:45:22.456Z"
+      },
+      "capabilities": ["power", "temperature", "mode", "fanSpeed", "swing", "schedule"],
+      "connectivity": {
+        "protocol": "wifi",
+        "ipAddress": "192.168.1.140",
+        "signalStrength": "good",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device12",
+      "name": "Living Room Blinds",
+      "type": "blinds",
+      "subType": "roller",
+      "manufacturer": "Lutron",
+      "model": "Serena",
+      "firmwareVersion": "2.0.1",
+      "roomId": "room1",
+      "icon": "🪟",
+      "state": {
+        "position": 100,
+        "tiltAngle": null,
+        "lastChanged": "2025-05-08T08:00:22.456Z"
+      },
+      "capabilities": ["position", "schedule"],
+      "connectivity": {
+        "protocol": "zigbee",
+        "ipAddress": null,
+        "signalStrength": "good",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device13",
+      "name": "Bathroom Lights",
+      "type": "light",
+      "subType": "ceiling",
+      "manufacturer": "Phillips Hue",
+      "model": "White Ambiance",
+      "firmwareVersion": "1.55.7",
+      "roomId": "room4",
+      "icon": "💡",
+      "state": {
+        "power": false,
+        "brightness": 0,
+        "colorTemperature": 3000,
+        "color": null,
+        "lastChanged": "2025-05-08T07:30:22.456Z"
+      },
+      "capabilities": ["power", "brightness", "colorTemperature"],
+      "connectivity": {
+        "protocol": "zigbee",
+        "ipAddress": null,
+        "signalStrength": "good",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device14",
+      "name": "Bathroom Fan",
+      "type": "fan",
+      "subType": "exhaust",
+      "manufacturer": "Panasonic",
+      "model": "WhisperCeiling",
+      "firmwareVersion": "1.2.0",
+      "roomId": "room4",
+      "icon": "💨",
+      "state": {
+        "power": false,
+        "speed": 0,
+        "humidity": 55,
+        "lastChanged": "2025-05-08T07:45:22.456Z"
+      },
+      "capabilities": ["power", "speed", "humidityTrigger"],
+      "connectivity": {
+        "protocol": "zwave",
+        "ipAddress": null,
+        "signalStrength": "good",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device15",
+      "name": "Office Lights",
+      "type": "light",
+      "subType": "ceiling",
+      "manufacturer": "Phillips Hue",
+      "model": "White and Color Ambiance",
+      "firmwareVersion": "1.55.7",
+      "roomId": "room5",
+      "icon": "💡",
+      "state": {
+        "power": true,
+        "brightness": 90,
+        "colorTemperature": 4000,
+        "color": null,
+        "lastChanged": "2025-05-08T09:00:22.456Z"
+      },
+      "capabilities": ["power", "brightness", "colorTemperature", "color", "scene"],
+      "connectivity": {
+        "protocol": "zigbee",
+        "ipAddress": null,
+        "signalStrength": "excellent",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device16",
+      "name": "Office AC",
+      "type": "climate",
+      "subType": "airConditioner",
+      "manufacturer": "Daikin",
+      "model": "FTXM Series",
+      "firmwareVersion": "3.1.5",
+      "roomId": "room5",
+      "icon": "❄️",
+      "state": {
+        "power": true,
+        "mode": "cool",
+        "temperature": 72,
+        "fanSpeed": "auto",
+        "swingMode": "off",
+        "lastChanged": "2025-05-08T09:15:22.456Z"
+      },
+      "capabilities": ["power", "temperature", "mode", "fanSpeed", "swing", "schedule"],
+      "connectivity": {
+        "protocol": "wifi",
+        "ipAddress": "192.168.1.145",
+        "signalStrength": "good",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device17",
+      "name": "Office Computer",
+      "type": "computer",
+      "subType": "desktop",
+      "manufacturer": "Dell",
+      "model": "XPS 8960",
+      "firmwareVersion": "1.0.3",
+      "roomId": "room5",
+      "icon": "💻",
+      "state": {
+        "power": true,
+        "sleepMode": false,
+        "cpuUsage": 25,
+        "memoryUsage": 48,
+        "lastChanged": "2025-05-08T08:45:22.456Z"
+      },
+      "capabilities": ["power", "sleepMode", "resourceMonitoring"],
+      "connectivity": {
+        "protocol": "wifi",
+        "ipAddress": "192.168.1.150",
+        "signalStrength": "excellent",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device18",
+      "name": "Office Printer",
+      "type": "office",
+      "subType": "printer",
+      "manufacturer": "HP",
+      "model": "LaserJet Pro",
+      "firmwareVersion": "4.2.1",
+      "roomId": "room5",
+      "icon": "🖨️",
+      "state": {
+        "power": true,
+        "printing": false,
+        "inkLevel": {
+          "black": 68,
+          "color": {
+            "cyan": 72,
+            "magenta": 65,
+            "yellow": 70
+          }
+        },
+        "lastChanged": "2025-05-07T15:45:22.456Z"
+      },
+      "capabilities": ["power", "printStatus", "consumableMonitoring"],
+      "connectivity": {
+        "protocol": "wifi",
+        "ipAddress": "192.168.1.155",
+        "signalStrength": "good",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device19",
+      "name": "Bedroom Ceiling Fan",
+      "type": "fan",
+      "subType": "ceiling",
+      "manufacturer": "Hunter",
+      "model": "Signal",
+      "firmwareVersion": "2.1.0",
+      "roomId": "room3",
+      "icon": "💨",
+      "state": {
+        "power": false,
+        "speed": 0,
+        "direction": "forward",
+        "lightOn": false,
+        "lightBrightness": 0,
+        "lastChanged": "2025-05-08T06:45:22.456Z"
+      },
+      "capabilities": ["power", "speed", "direction", "light"],
+      "connectivity": {
+        "protocol": "wifi",
+        "ipAddress": "192.168.1.160",
+        "signalStrength": "good",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device20",
+      "name": "Office Monitor",
+      "type": "computer",
+      "subType": "monitor",
+      "manufacturer": "Dell",
+      "model": "Ultrasharp U2720Q",
+      "firmwareVersion": "M2B101",
+      "roomId": "room5",
+      "icon": "🖥️",
+      "state": {
+        "power": true,
+        "brightness": 70,
+        "input": "DisplayPort",
+        "lastChanged": "2025-05-08T08:45:22.456Z"
+      },
+      "capabilities": ["power", "brightness", "input"],
+      "connectivity": {
+        "protocol": "direct",
+        "ipAddress": null,
+        "signalStrength": null,
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device21",
+      "name": "Office Blinds",
+      "type": "blinds",
+      "subType": "roller",
+      "manufacturer": "Lutron",
+      "model": "Serena",
+      "firmwareVersion": "2.0.1",
+      "roomId": "room5",
+      "icon": "🪟",
+      "state": {
+        "position": 80,
+        "tiltAngle": null,
+        "lastChanged": "2025-05-08T09:30:22.456Z"
+      },
+      "capabilities": ["position", "schedule"],
+      "connectivity": {
+        "protocol": "zigbee",
+        "ipAddress": null,
+        "signalStrength": "good",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device22",
+      "name": "Garden Lights",
+      "type": "light",
+      "subType": "outdoor",
+      "manufacturer": "Phillips Hue",
+      "model": "Outdoor",
+      "firmwareVersion": "1.55.7",
+      "roomId": "room6",
+      "icon": "💡",
+      "state": {
+        "power": false,
+        "brightness": 0,
+        "colorTemperature": null,
+        "color": {
+          "hue": 240,
+          "saturation": 100,
+          "brightness": 100
+        },
+        "lastChanged": "2025-05-08T05:30:22.456Z"
+      },
+      "capabilities": ["power", "brightness", "color", "schedule"],
+      "connectivity": {
+        "protocol": "zigbee",
+        "ipAddress": null,
+        "signalStrength": "fair",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device23",
+      "name": "Garden Sprinklers",
+      "type": "irrigation",
+      "subType": "sprinkler",
+      "manufacturer": "Rachio",
+      "model": "3 Smart Sprinkler Controller",
+      "firmwareVersion": "3.2.1",
+      "roomId": "room6",
+      "icon": "💦",
+      "state": {
+        "power": true,
+        "active": false,
+        "schedule": {
+          "active": true,
+          "nextRun": "2025-05-09T06:00:00.000Z",
+          "duration": 20
+        },
+        "zones": [
+          {"id": 1, "name": "Front Lawn", "active": false},
+          {"id": 2, "name": "Back Lawn", "active": false},
+          {"id": 3, "name": "Garden Beds", "active": false}
+        ],
+        "lastChanged": "2025-05-08T06:25:22.456Z"
+      },
+      "capabilities": ["power", "zoneControl", "schedule", "weatherAdaptive"],
+      "connectivity": {
+        "protocol": "wifi",
+        "ipAddress": "192.168.1.165",
+        "signalStrength": "fair",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    },
+    {
+      "id": "device24",
+      "name": "Outdoor Camera",
+      "type": "security",
+      "subType": "camera",
+      "manufacturer": "Ring",
+      "model": "Spotlight Cam",
+      "firmwareVersion": "2.3.4",
+      "roomId": "room6",
+      "icon": "📷",
+      "state": {
+        "power": true,
+        "recording": true,
+        "motionDetection": true,
+        "spotlight": false,
+        "lastMotion": "2025-05-08T09:15:22.456Z",
+        "lastChanged": "2025-05-08T08:00:22.456Z"
+      },
+      "capabilities": ["power", "recording", "motionDetection", "spotlight", "twoWayAudio", "notifications"],
+      "connectivity": {
+        "protocol": "wifi",
+        "ipAddress": "192.168.1.170",
+        "signalStrength": "fair",
+        "online": true,
+        "lastSeen": "2025-05-08T10:25:22.456Z"
+      }
+    }
+  ],
+  "deviceGroups": [
+    {
+      "id": "group1",
+      "name": "All Lights",
+      "icon": "💡",
+      "devices": ["device1", "device4", "device8", "device13", "device15", "device22"],
+      "state": {
+        "power": true
+      }
+    },
+    {
+      "id": "group2",
+      "name": "All ACs",
+      "icon": "❄️",
+      "devices": ["device10", "device11", "device16"],
+      "state": {
+        "power": true
+      }
+    },
+    {
+      "id": "group3",
+      "name": "Security",
+      "icon": "🔒",
+      "devices": ["device24"],
+      "state": {
+        "power": true
+      }
+    },
+    {
+      "id": "group4",
+      "name": "Entertainment",
+      "icon": "🎮",
+      "devices": ["device2", "device3", "device9"],
+      "state": {
+        "power": false
+      }
+    }
+  ]
+}

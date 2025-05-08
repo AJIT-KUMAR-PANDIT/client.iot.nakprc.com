@@ -1,0 +1,133 @@
+{
+  "home": {
+    "id": "home1",
+    "name": "Smart Villa",
+    "address": "123 Smart Home Ave, Tech City, CA 94024",
+    "timezone": "America/Los_Angeles",
+    "coordinates": {
+      "latitude": 37.3861,
+      "longitude": -122.0839
+    },
+    "size": {
+      "squareFeet": 2400,
+      "floors": 2
+    },
+    "rooms": [
+      {
+        "id": "room1",
+        "name": "Living Room",
+        "floor": 1,
+        "type": "living",
+        "icon": "🛋️",
+        "devices": ["device1", "device2", "device3", "device10", "device12"],
+        "temperature": {
+          "current": 72,
+          "target": 72,
+          "humidity": 45
+        }
+      },
+      {
+        "id": "room2",
+        "name": "Kitchen",
+        "floor": 1,
+        "type": "kitchen",
+        "icon": "🍳",
+        "devices": ["device4", "device5", "device6", "device7"],
+        "temperature": {
+          "current": 74,
+          "target": 74,
+          "humidity": 48
+        }
+      },
+      {
+        "id": "room3",
+        "name": "Master Bedroom",
+        "floor": 2,
+        "type": "bedroom",
+        "icon": "🛏️",
+        "devices": ["device8", "device9", "device11", "device19"],
+        "temperature": {
+          "current": 70,
+          "target": 68,
+          "humidity": 40
+        }
+      },
+      {
+        "id": "room4",
+        "name": "Bathroom",
+        "floor": 2,
+        "type": "bathroom",
+        "icon": "🚿",
+        "devices": ["device13", "device14"],
+        "temperature": {
+          "current": 75,
+          "target": 74,
+          "humidity": 55
+        }
+      },
+      {
+        "id": "room5",
+        "name": "Office",
+        "floor": 1,
+        "type": "office",
+        "icon": "💻",
+        "devices": ["device15", "device16", "device17", "device18", "device20", "device21"],
+        "temperature": {
+          "current": 71,
+          "target": 72,
+          "humidity": 43
+        }
+      },
+      {
+        "id": "room6",
+        "name": "Garden",
+        "floor": 0,
+        "type": "outdoor",
+        "icon": "🌿",
+        "devices": ["device22", "device23", "device24"],
+        "temperature": {
+          "current": 68,
+          "target": null,
+          "humidity": 72
+        }
+      }
+    ]
+  },
+  "householdMembers": [
+    {
+      "userId": "user1",
+      "isHome": true,
+      "lastLocationUpdate": "2025-05-08T10:30:44.123Z",
+      "locationName": "Home"
+    },
+    {
+      "userId": "user2",
+      "isHome": false,
+      "lastLocationUpdate": "2025-05-08T08:15:22.789Z",
+      "locationName": "Work"
+    },
+    {
+      "userId": "user3",
+      "isHome": false,
+      "lastLocationUpdate": "2025-05-06T19:45:10.456Z",
+      "locationName": "Away"
+    }
+  ],
+  "homeStatus": {
+    "mode": "home",
+    "occupancy": true,
+    "securitySystem": "armed_home",
+    "mainDoor": "locked",
+    "garageDoor": "closed",
+    "windows": "closed",
+    "weather": {
+      "temperature": 72,
+      "condition": "sunny",
+      "forecast": [
+        {"day": "Today", "high": 75, "low": 62, "condition": "sunny"},
+        {"day": "Tomorrow", "high": 77, "low": 63, "condition": "partly_cloudy"},
+        {"day": "Wednesday", "high": 72, "low": 64, "condition": "rain"}
+      ]
+    }
+  }
+}

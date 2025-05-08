@@ -1,0 +1,103 @@
+{
+  "users": [
+    {
+      "id": "user1",
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "phone": "+1 (555) 123-4567",
+      "avatar": null,
+      "preferences": {
+        "language": "en",
+        "units": "imperial",
+        "theme": "light",
+        "notifications": {
+          "email": true,
+          "push": true,
+          "sms": false
+        }
+      },
+      "permissions": {
+        "role": "admin",
+        "canControlDevices": true,
+        "canViewStats": true,
+        "canModifyAutomation": true,
+        "canInviteUsers": true
+      },
+      "loginHistory": [
+        {
+          "timestamp": "2025-05-07T18:25:43.511Z",
+          "ipAddress": "192.168.1.5",
+          "device": "iPhone 15 Pro"
+        },
+        {
+          "timestamp": "2025-05-07T10:12:22.178Z",
+          "ipAddress": "192.168.1.5",
+          "device": "MacBook Pro"
+        }
+      ]
+    },
+    {
+      "id": "user2",
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "phone": "+1 (555) 987-6543",
+      "avatar": null,
+      "preferences": {
+        "language": "en",
+        "units": "metric",
+        "theme": "dark",
+        "notifications": {
+          "email": true,
+          "push": true,
+          "sms": true
+        }
+      },
+      "permissions": {
+        "role": "user",
+        "canControlDevices": true,
+        "canViewStats": true,
+        "canModifyAutomation": false,
+        "canInviteUsers": false
+      },
+      "loginHistory": [
+        {
+          "timestamp": "2025-05-06T19:30:15.734Z",
+          "ipAddress": "192.168.1.10",
+          "device": "Samsung Galaxy S24"
+        }
+      ]
+    },
+    {
+      "id": "user3",
+      "name": "Alex Johnson",
+      "email": "alex.johnson@example.com",
+      "phone": "+1 (555) 456-7890",
+      "avatar": null,
+      "preferences": {
+        "language": "es",
+        "units": "metric",
+        "theme": "system",
+        "notifications": {
+          "email": false,
+          "push": true,
+          "sms": false
+        }
+      },
+      "permissions": {
+        "role": "guest",
+        "canControlDevices": true,
+        "canViewStats": false,
+        "canModifyAutomation": false,
+        "canInviteUsers": false
+      },
+      "loginHistory": [
+        {
+          "timestamp": "2025-05-01T14:22:10.123Z",
+          "ipAddress": "192.168.1.22",
+          "device": "Web Browser"
+        }
+      ]
+    }
+  ],
+  "currentUser": "user1"
+}

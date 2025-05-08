@@ -1,0 +1,298 @@
+{
+  "summary": {
+    "today": {
+      "totalUsage": 12.4,
+      "cost": 1.86,
+      "solarGenerated": 8.7,
+      "netUsage": 3.7,
+      "peakTime": "18:00-20:00",
+      "comparison": {
+        "vs_yesterday": -12,
+        "vs_last_week": -8,
+        "vs_last_month": -10
+      }
+    },
+    "thisWeek": {
+      "totalUsage": 86.2,
+      "cost": 12.93,
+      "solarGenerated": 56.3,
+      "netUsage": 29.9,
+      "peakDays": ["monday", "tuesday"],
+      "comparison": {
+        "vs_last_week": -5,
+        "vs_last_month": -7
+      }
+    },
+    "thisMonth": {
+      "totalUsage": 372.5,
+      "cost": 55.88,
+      "solarGenerated": 245.2,
+      "netUsage": 127.3,
+      "peakWeek": "first",
+      "comparison": {
+        "vs_last_month": -3,
+        "vs_last_year": -12
+      }
+    },
+    "thisYear": {
+      "totalUsage": 4560,
+      "cost": 684,
+      "solarGenerated": 2978,
+      "netUsage": 1582,
+      "peakMonth": "july",
+      "comparison": {
+        "vs_last_year": -8
+      }
+    }
+  },
+  "deviceUsage": [
+    {
+      "id": "device10",
+      "name": "Living Room AC",
+      "type": "climate",
+      "icon": "❄️",
+      "usage": {
+        "today": 5.2,
+        "thisWeek": 36.4,
+        "thisMonth": 156.5,
+        "thisYear": 1916.0
+      },
+      "percentage": 42,
+      "trend": "up",
+      "trendValue": 5
+    },
+    {
+      "id": "device5",
+      "name": "Refrigerator",
+      "type": "appliance",
+      "icon": "❄️",
+      "usage": {
+        "today": 2.2,
+        "thisWeek": 15.5,
+        "thisMonth": 67.1,
+        "thisYear": 821.0
+      },
+      "percentage": 18,
+      "trend": "stable",
+      "trendValue": 0
+    },
+    {
+      "id": "device17",
+      "name": "Office Computer",
+      "type": "computer",
+      "icon": "💻",
+      "usage": {
+        "today": 1.5,
+        "thisWeek": 10.3,
+        "thisMonth": 44.7,
+        "thisYear": 547.0
+      },
+      "percentage": 12,
+      "trend": "up",
+      "trendValue": 3
+    },
+    {
+      "id": "group1",
+      "name": "All Lights",
+      "type": "lighting",
+      "icon": "💡",
+      "usage": {
+        "today": 1.0,
+        "thisWeek": 6.9,
+        "thisMonth": 29.8,
+        "thisYear": 365.0
+      },
+      "percentage": 8,
+      "trend": "down",
+      "trendValue": -8
+    },
+    {
+      "id": "group4",
+      "name": "Entertainment",
+      "type": "entertainment",
+      "icon": "🎮",
+      "usage": {
+        "today": 0.9,
+        "thisWeek": 6.0,
+        "thisMonth": 26.1,
+        "thisYear": 319.0
+      },
+      "percentage": 7,
+      "trend": "up",
+      "trendValue": 2
+    },
+    {
+      "id": "other",
+      "name": "Other",
+      "type": "other",
+      "icon": "🔌",
+      "usage": {
+        "today": 1.6,
+        "thisWeek": 11.1,
+        "thisMonth": 48.3,
+        "thisYear": 592.0
+      },
+      "percentage": 13,
+      "trend": "stable",
+      "trendValue": 0
+    }
+  ],
+  "hourlyUsage": {
+    "today": [
+      {"hour": "00:00", "usage": 0.4, "solar": 0.0},
+      {"hour": "01:00", "usage": 0.3, "solar": 0.0},
+      {"hour": "02:00", "usage": 0.3, "solar": 0.0},
+      {"hour": "03:00", "usage": 0.3, "solar": 0.0},
+      {"hour": "04:00", "usage": 0.3, "solar": 0.0},
+      {"hour": "05:00", "usage": 0.3, "solar": 0.0},
+      {"hour": "06:00", "usage": 0.5, "solar": 0.1},
+      {"hour": "07:00", "usage": 0.8, "solar": 0.4},
+      {"hour": "08:00", "usage": 1.0, "solar": 0.8},
+      {"hour": "09:00", "usage": 0.7, "solar": 1.0},
+      {"hour": "10:00", "usage": 0.5, "solar": 1.1},
+      {"hour": "11:00", "usage": 0.5, "solar": 1.2},
+      {"hour": "12:00", "usage": 0.6, "solar": 1.2},
+      {"hour": "13:00", "usage": 0.6, "solar": 1.1},
+      {"hour": "14:00", "usage": 0.6, "solar": 1.0},
+      {"hour": "15:00", "usage": 0.5, "solar": 0.8},
+      {"hour": "16:00", "usage": 0.6, "solar": 0.6},
+      {"hour": "17:00", "usage": 0.8, "solar": 0.4},
+      {"hour": "18:00", "usage": 1.2, "solar": 0.0},
+      {"hour": "19:00", "usage": 1.3, "solar": 0.0},
+      {"hour": "20:00", "usage": 0.9, "solar": 0.0},
+      {"hour": "21:00", "usage": 0.6, "solar": 0.0},
+      {"hour": "22:00", "usage": 0.5, "solar": 0.0},
+      {"hour": "23:00", "usage": 0.4, "solar": 0.0}
+    ],
+    "yesterday": [
+      {"hour": "00:00", "usage": 0.4, "solar": 0.0},
+      {"hour": "01:00", "usage": 0.3, "solar": 0.0},
+      {"hour": "02:00", "usage": 0.3, "solar": 0.0},
+      {"hour": "03:00", "usage": 0.3, "solar": 0.0},
+      {"hour": "04:00", "usage": 0.3, "solar": 0.0},
+      {"hour": "05:00", "usage": 0.4, "solar": 0.0},
+      {"hour": "06:00", "usage": 0.5, "solar": 0.1},
+      {"hour": "07:00", "usage": 0.9, "solar": 0.3},
+      {"hour": "08:00", "usage": 1.1, "solar": 0.7},
+      {"hour": "09:00", "usage": 0.8, "solar": 0.9},
+      {"hour": "10:00", "usage": 0.6, "solar": 1.0},
+      {"hour": "11:00", "usage": 0.5, "solar": 1.1},
+      {"hour": "12:00", "usage": 0.6, "solar": 1.2},
+      {"hour": "13:00", "usage": 0.7, "solar": 1.1},
+      {"hour": "14:00", "usage": 0.7, "solar": 1.0},
+      {"hour": "15:00", "usage": 0.6, "solar": 0.8},
+      {"hour": "16:00", "usage": 0.7, "solar": 0.5},
+      {"hour": "17:00", "usage": 0.9, "solar": 0.3},
+      {"hour": "18:00", "usage": 1.3, "solar": 0.0},
+      {"hour": "19:00", "usage": 1.4, "solar": 0.0},
+      {"hour": "20:00", "usage": 1.0, "solar": 0.0},
+      {"hour": "21:00", "usage": 0.7, "solar": 0.0},
+      {"hour": "22:00", "usage": 0.6, "solar": 0.0},
+      {"hour": "23:00", "usage": 0.5, "solar": 0.0}
+    ]
+  },
+  "dailyUsage": {
+    "thisWeek": [
+      {"day": "Monday", "usage": 13.5, "solar": 8.2},
+      {"day": "Tuesday", "usage": 13.8, "solar": 7.9},
+      {"day": "Wednesday", "usage": 12.9, "solar": 8.5},
+      {"day": "Thursday", "usage": 12.4, "solar": 8.7},
+      {"day": "Friday", "usage": 0.0, "solar": 0.0},
+      {"day": "Saturday", "usage": 0.0, "solar": 0.0},
+      {"day": "Sunday", "usage": 0.0, "solar": 0.0}
+    ],
+    "lastWeek": [
+      {"day": "Monday", "usage": 14.2, "solar": 7.8},
+      {"day": "Tuesday", "usage": 14.5, "solar": 7.6},
+      {"day": "Wednesday", "usage": 13.8, "solar": 8.0},
+      {"day": "Thursday", "usage": 13.5, "solar": 8.2},
+      {"day": "Friday", "usage": 12.6, "solar": 8.5},
+      {"day": "Saturday", "usage": 10.1, "solar": 9.1},
+      {"day": "Sunday", "usage": 9.8, "solar": 8.9}
+    ]
+  },
+  "monthlyUsage": {
+    "thisYear": [
+      {"month": "January", "usage": 420.5, "solar": 220.3},
+      {"month": "February", "usage": 385.2, "solar": 235.8},
+      {"month": "March", "usage": 380.0, "solar": 250.5},
+      {"month": "April", "usage": 378.5, "solar": 268.2},
+      {"month": "May", "usage": 372.5, "solar": 245.2},
+      {"month": "June", "usage": 0.0, "solar": 0.0},
+      {"month": "July", "usage": 0.0, "solar": 0.0},
+      {"month": "August", "usage": 0.0, "solar": 0.0},
+      {"month": "September", "usage": 0.0, "solar": 0.0},
+      {"month": "October", "usage": 0.0, "solar": 0.0},
+      {"month": "November", "usage": 0.0, "solar": 0.0},
+      {"month": "December", "usage": 0.0, "solar": 0.0}
+    ],
+    "lastYear": [
+      {"month": "January", "usage": 458.3, "solar": 198.5},
+      {"month": "February", "usage": 420.5, "solar": 210.2},
+      {"month": "March", "usage": 415.8, "solar": 225.3},
+      {"month": "April", "usage": 410.2, "solar": 240.8},
+      {"month": "May", "usage": 405.6, "solar": 230.4},
+      {"month": "June", "usage": 440.2, "solar": 290.5},
+      {"month": "July", "usage": 480.5, "solar": 310.2},
+      {"month": "August", "usage": 475.8, "solar": 305.6},
+      {"month": "September", "usage": 420.3, "solar": 280.5},
+      {"month": "October", "usage": 405.6, "solar": 250.3},
+      {"month": "November", "usage": 425.8, "solar": 220.5},
+      {"month": "December", "usage": 440.2, "solar": 200.8}
+    ]
+  },
+  "batteryStatus": {
+    "installed": true,
+    "capacity": 13.5,
+    "currentCharge": 10.1,
+    "level": 75,
+    "charging": true,
+    "inputPower": 2.5,
+    "outputPower": 0.8,
+    "mode": "self_consumption",
+    "health": 98,
+    "timeRemaining": 14,
+    "lifetimeSavings": 285.6
+  },
+  "utilityRates": [
+    {
+      "id": 1,
+      "name": "Off-peak",
+      "timeStart": "00:00",
+      "timeEnd": "10:00",
+      "rate": 0.11,
+      "type": "off_peak"
+    },
+    {
+      "id": 2,
+      "name": "Mid-peak",
+      "timeStart": "10:00",
+      "timeEnd": "16:00",
+      "rate": 0.15,
+      "type": "mid_peak"
+    },
+    {
+      "id": 3,
+      "name": "Peak",
+      "timeStart": "16:00",
+      "timeEnd": "21:00",
+      "rate": 0.24,
+      "type": "peak"
+    },
+    {
+      "id": 4,
+      "name": "Off-peak",
+      "timeStart": "21:00",
+      "timeEnd": "24:00",
+      "rate": 0.11,
+      "type": "off_peak"
+    }
+  ],
+  "smartMeterReadings": {
+    "current": 2.4,
+    "voltage": 120,
+    "frequency": 60,
+    "powerFactor": 0.95,
+    "lastUpdated": "2025-05-08T10:25:22.456Z"
+  }
+}
