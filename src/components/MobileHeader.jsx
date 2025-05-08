@@ -23,7 +23,9 @@ const MobileHeader = ({ setMenuOpen, isDarkMode, toggleDarkMode }) => {
           />
         </svg>
       </button>
-      <h1 className="text-xl font-bold text-blue-600 dark:text-blue-400">I</h1>
+      <h1 className="text-xl font-bold text-blue-600 dark:text-blue-400">
+        IOT Systems Labs
+      </h1>
       <button
         onClick={toggleDarkMode}
         className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"

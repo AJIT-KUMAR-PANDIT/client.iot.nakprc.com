@@ -10,12 +10,16 @@ import Security from "./components/pages/Security";
 import Automation from "./components/pages/Automation";
 import Energy from "./components/pages/Energy";
 import Settings from "./components/pages/Settings";
+import LunaAIUI from "./ai/components/LunaAIUI";
 import AppProvider, { useAppContext } from "./context/AppContext";
 import "./App.css";
 
 function AppContent() {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [voiceAssistantOpen, setVoiceAssistantOpen] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [showTextChat, setShowTextChat] = useState(false);
 
   const {
     isDarkMode,
@@ -109,7 +113,22 @@ function AppContent() {
             )}
           </div>
         </div>
-        <BottomNav />
+        <BottomNav
+          setActiveTab={setActiveTab}
+          setMenuOpen={setMenuOpen}
+          setVoiceAssistantOpen={setVoiceAssistantOpen}
+        />
+
+        {/* Luna AI Voice UI Overlay */}
+        {voiceAssistantOpen && (
+          <LunaAIUI
+            onToggleSettings={() => setShowSettings(!showSettings)}
+            onToggleTextChat={() => setShowTextChat(!showTextChat)}
+            showTextChat={showTextChat}
+            onClose={() => setVoiceAssistantOpen(false)}
+            className="fixed inset-0 z-50"
+          />
+        )}
       </div>
     </div>
   );
