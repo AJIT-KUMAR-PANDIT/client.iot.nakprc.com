@@ -1,9 +1,20 @@
 import React, { useEffect } from "react";
 import { ChatWebLLM } from "@langchain/community/chat_models/webllm";
 import { HumanMessage } from "@langchain/core/messages";
+import useStore from "../../zustand/store";
+import {
+  downloadModelToWebBrowser,
+  downloadModelToMobileApp,
+} from "../components/DownloadModel";
+
 export const useLLM = () => {
+  const { llmModelDownloadLink, setllmModelDownloadLink } = useStore();
+  useEffect(() => {
+    setllmModelDownloadLink(llmModelHuggungFace);
+  }, []);
+
   const modelConfig = {
-    model: "Phi-3-mini-4k-instruct-q4f16_1-MLC",
+    model: llmModelDownloadLink,
     chatOptions: {
       temperature: 0.5,
     },
