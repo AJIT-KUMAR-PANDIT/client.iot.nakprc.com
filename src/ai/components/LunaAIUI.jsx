@@ -487,11 +487,7 @@ const LunaAIUI = ({ onToggleSettings, onClose }) => {
                     <div className="absolute inset-4 rounded-full bg-white opacity-30 animate-ping"></div>
                   )}
                 </div>
-                <div className="absolute w-28 h-28 bg-slate-900 rounded-full -right-4 flex items-center justify-center">
-                  <div className="text-4xl font-thin text-white relative -left-2">
-                    AI
-                  </div>
-                </div>
+                <div className="absolute w-28 h-28 bg-slate-900 rounded-full -right-4 flex items-center justify-center"></div>
               </div>
 
               {/* Text Elements */}
