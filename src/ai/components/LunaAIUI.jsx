@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Mic, MicOff, Send, Moon, MoreVertical, Settings } from "lucide-react";
+import { useLLM } from "../llm/useLLM"; // Added import for useLLM
 
 // Luna AI Voice UI component
 const LunaAIUI = ({ onToggleSettings, onClose }) => {
@@ -18,6 +19,9 @@ const LunaAIUI = ({ onToggleSettings, onClose }) => {
   // References
   const messageRef = useRef(null);
   const inputRef = useRef(null);
+
+  // Initialize LLM
+  const { llmResponse, llmResponseStream } = useLLM(); // Initialize useLLM
 
   // Effect to scroll messages to bottom
   useEffect(() => {
@@ -80,17 +84,18 @@ const LunaAIUI = ({ onToggleSettings, onClose }) => {
     if (isListening) {
       setCurrentState("listening");
       setMessage("Listening...");
-    } else if (transcript) {
+    } else if (transcript && !isListening) {
+      // Ensure transcript is processed only when not listening
       handleTranscript();
     }
   }, [isListening, transcript]);
 
   // __________stsrt_____________________
   // Define missing functions
-  const processQuery = async (query) => {
-    // Implement your logic to process the query
-    return "Processed: " + query;
-  };
+  // const processQuery = async (query) => {
+  //   // Implement your logic to process the query
+  //   return "Processed: " + query;
+  // }; // Will be replaced by llmResponse
 
   const executeCommand = async (command) => {
     // Implement your logic to execute the command
@@ -130,33 +135,43 @@ const LunaAIUI = ({ onToggleSettings, onClose }) => {
   const handleTranscript = async () => {
     if (!transcript) return;
 
+    const userMessage = {
+      id: Date.now(),
+      role: "user",
+      content: transcript,
+      timestamp: new Date(),
+    };
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
+    setTranscript(""); // Clear transcript after processing
+
     setCurrentState("thinking");
     setMessage(`Processing: "${transcript}"`);
 
     try {
-      const response = await processQuery(transcript);
-      const commandMatch = response.match(/^COMMAND:(.*)/);
+      const aiResponse = await llmResponse(transcript);
+      const aiMessageContent =
+        aiResponse?.content || "Sorry, I couldn't process that.";
 
-      if (commandMatch && commandMatch[1]) {
-        const command = commandMatch[1].trim();
-        const result = await executeCommand(command);
+      const assistantMessage = {
+        id: Date.now() + 1,
+        role: "assistant",
+        content: aiMessageContent,
+        timestamp: new Date(),
+      };
+      setMessages((prevMessages) => [...prevMessages, assistantMessage]);
 
-        if (result && result.success) {
-          setCurrentState("success");
-          setMessage(result.message || "Command executed successfully");
-          speak(result.message || "Command executed successfully");
-        } else {
-          setCurrentState("error");
-          setMessage(result?.message || "Failed to execute command");
-          speak(result?.message || "Failed to execute command");
-        }
-      } else {
-        setCurrentState("speaking");
-        setMessage(response);
-        speak(response);
-      }
+      setCurrentState("speaking");
+      setMessage(aiMessageContent);
+      speak(aiMessageContent);
     } catch (error) {
       console.error("Error processing transcript:", error);
+      const errorMessage = {
+        id: Date.now() + 1,
+        role: "assistant",
+        content: "Sorry, I encountered an error processing your request.",
+        timestamp: new Date(),
+      };
+      setMessages((prevMessages) => [...prevMessages, errorMessage]);
       setCurrentState("error");
       setMessage("Sorry, I encountered an error processing your request.");
       speak("Sorry, I encountered an error processing your request.");
@@ -193,16 +208,34 @@ const LunaAIUI = ({ onToggleSettings, onClose }) => {
     if (!textInput.trim()) return;
 
     const query = textInput;
+    const userMessage = {
+      id: Date.now(),
+      role: "user",
+      content: query,
+      timestamp: new Date(),
+    };
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
     setTextInput("");
+
     setCurrentState("thinking");
     setMessage(`Processing: "${query}"`);
 
     try {
       // Process with AI
-      const response = await processQuery(query);
+      const aiResponse = await llmResponse(query);
+      const aiMessageContent =
+        aiResponse?.content || "Sorry, I couldn't understand that.";
 
-      // Check if it's a device command
-      const commandMatch = response.match(/^COMMAND:(.*)/);
+      const assistantMessage = {
+        id: Date.now() + 1, // Ensure unique ID
+        role: "assistant",
+        content: aiMessageContent,
+        timestamp: new Date(),
+      };
+      setMessages((prevMessages) => [...prevMessages, assistantMessage]);
+
+      // Check if it's a device command (this part might need adjustment based on LLM output format)
+      const commandMatch = aiMessageContent.match(/^COMMAND:(.*)/);
       if (commandMatch && commandMatch[1]) {
         const command = commandMatch[1].trim();
         const result = await executeCommand(command);
@@ -219,11 +252,18 @@ const LunaAIUI = ({ onToggleSettings, onClose }) => {
       } else {
         // Normal response
         setCurrentState("speaking");
-        setMessage(response);
-        speak(response);
+        setMessage(aiMessageContent);
+        speak(aiMessageContent);
       }
     } catch (error) {
       console.error("Error processing text input:", error);
+      const errorMessage = {
+        id: Date.now() + 1,
+        role: "assistant",
+        content: "Sorry, I encountered an error processing your request.",
+        timestamp: new Date(),
+      };
+      setMessages((prevMessages) => [...prevMessages, errorMessage]);
       setCurrentState("error");
       setMessage("Sorry, I encountered an error processing your request.");
       speak("Sorry, I encountered an error processing your request.");
@@ -399,7 +439,7 @@ const LunaAIUI = ({ onToggleSettings, onClose }) => {
 
           {showTextChat ? (
             /* Text Chat Interface */
-            <div className="w-full h-full flex flex-col">
+            <div className="relative z-10 w-full h-full flex flex-col">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-2xl font-light text-white">Luna AI Chat</h2>
                 <button
@@ -438,11 +478,11 @@ const LunaAIUI = ({ onToggleSettings, onClose }) => {
                     }`}
                   >
                     {message.content}
-                    {settings.uiSettings.showTimestamps && (
+                    {/* {settings.uiSettings.showTimestamps && ( // Assuming settings is defined elsewhere or remove this line
                       <div className="text-xs opacity-70 mt-1">
                         {formatTime(new Date(message.timestamp))}
                       </div>
-                    )}
+                    )} */}
                   </div>
                 ))}
                 {currentState === "thinking" && (
