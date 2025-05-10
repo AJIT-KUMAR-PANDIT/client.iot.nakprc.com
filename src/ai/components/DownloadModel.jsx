@@ -1,17 +1,26 @@
 import { Filesystem, Directory } from "@capacitor/filesystem";
-import { zustand } from "zustand";
-import { useStore } from "../components/Store";
+import useStore from "../../zustand/store";
 import { useState, useEffect } from "react";
+import { Capacitor } from "@capacitor/core";
 
-export default DownloadModel = () => {
+const platform = Capacitor.getPlatform();
+const isMobileApp = platform === "ios" || platform === "android" ? true : false;
+
+export default function DownloadModel() {
   const { llmModelDownloadLink } = useStore();
   const [isModelDownloaded, setIsModelDownloaded] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState(0);
   const [downloadError, setDownloadError] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
-  const downloadModel = async (llmModelDownloadLink_fun, isMobileApp) => {
+  const downloadModel = async (llmModelDownloadLink_fun) => {
     try {
-      const response = await fetch(llmModelDownloadLink_fun);
+      const response = await fetch(llmModelDownloadLink_fun, {
+        onprogress: (event) => {
+          const progress = Math.round((event.loaded / event.total) * 100);
+          setDownloadProgress(progress);
+        },
+      });
       if (!response.ok) {
         throw new Error(
           `Failed to fetch model: ${response.status} ${response.statusText}`
@@ -36,47 +45,41 @@ export default DownloadModel = () => {
       console.error("Error downloading model:", error);
       setDownloadError(error);
     }
-  };
-
-  const downloadModelToWebBrowser = (llmModelDownloadLink_fun) => {
-    downloadModel(llmModelDownloadLink_fun, false);
-  };
-
-  const downloadModelToMobileApp = (llmModelDownloadLink_fun) => {
-    downloadModel(llmModelDownloadLink_fun, true);
+    // Removed setShowModal(false) from here so modal stays open until user closes it
   };
 
   useEffect(() => {
-    const checkIfModelIsDownloaded = async () => {
-      if (localStorage.getItem("ggufModel")) {
-        setIsModelDownloaded(true);
-      } else if (
-        await Filesystem.checkFile({
-          path: "nakprc/models/lunaai.gguf",
-          directory: Directory.Documents,
-        })
-      ) {
-        setIsModelDownloaded(true);
-      }
-    };
-    checkIfModelIsDownloaded();
+    if (isMobileApp) {
+      const checkIfModelIsDownloaded = async () => {
+        if (localStorage.getItem("ggufModel")) {
+          setIsModelDownloaded(true);
+        } else if (
+          await Filesystem.checkFile({
+            path: "nakprc/models/lunaai.gguf",
+            directory: Directory.Documents,
+          })
+        ) {
+          setIsModelDownloaded(true);
+        }
+      };
+      checkIfModelIsDownloaded();
+    }
   }, []);
 
   return (
     <>
       {isModelDownloaded ? (
-        <p>Model is already downloaded.</p>
+        console.log("Model is already downloaded.")
       ) : (
         <div>
           <button
-            onClick={() => downloadModelToWebBrowser(llmModelDownloadLink)}
+            onClick={() => {
+              setShowModal(true);
+              downloadModel(llmModelDownloadLink);
+            }}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
-            Download Model to Web Browser
-          </button>
-          <button
-            onClick={() => downloadModelToMobileApp(llmModelDownloadLink)}
-          >
-            Download Model to Mobile App
+            Download Model
           </button>
           {downloadError && <p>Error: {downloadError.message}</p>}
           {downloadProgress > 0 && (
@@ -84,6 +87,19 @@ export default DownloadModel = () => {
           )}
         </div>
       )}
+
+      {showModal && (
+        <div className="fixed top-0 left-0 right-0 bg-blue-500 text-white p-4 text-center">
+          <p>Downloading model...</p>
+          {downloadProgress > 0 && <p>Progress: {downloadProgress}%</p>}
+          <button
+            onClick={() => setShowModal(false)}
+            className="absolute top-0 right-0 m-2 text-white"
+          >
+            &times;
+          </button>
+        </div>
+      )}
     </>
   );
-};
+}

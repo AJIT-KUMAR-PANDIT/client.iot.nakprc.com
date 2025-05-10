@@ -13,6 +13,7 @@ import Settings from "./components/pages/Settings";
 import LunaAIUI from "./ai/components/LunaAIUI";
 import AppProvider, { useAppContext } from "./context/AppContext";
 import "./App.css";
+import DownloadModel from "./ai/components/DownloadModel";
 
 function AppContent() {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -121,13 +122,16 @@ function AppContent() {
 
         {/* Luna AI Voice UI Overlay */}
         {voiceAssistantOpen && (
-          <LunaAIUI
-            onToggleSettings={() => setShowSettings(!showSettings)}
-            onToggleTextChat={() => setShowTextChat(!showTextChat)}
-            showTextChat={showTextChat}
-            onClose={() => setVoiceAssistantOpen(false)}
-            className="fixed inset-0 z-50"
-          />
+          <>
+            <LunaAIUI
+              onToggleSettings={() => setShowSettings(!showSettings)}
+              onToggleTextChat={() => setShowTextChat(!showTextChat)}
+              showTextChat={showTextChat}
+              onClose={() => setVoiceAssistantOpen(false)}
+              className="fixed inset-0 z-50"
+            />
+            <DownloadModel />
+          </>
         )}
       </div>
     </div>

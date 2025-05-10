@@ -2,13 +2,11 @@ import React, { useEffect } from "react";
 import { ChatWebLLM } from "@langchain/community/chat_models/webllm";
 import { HumanMessage } from "@langchain/core/messages";
 import useStore from "../../zustand/store";
-import {
-  downloadModelToWebBrowser,
-  downloadModelToMobileApp,
-} from "../components/DownloadModel";
+import Dashboard from "../../components/pages/Dashboard";
 
 export const useLLM = () => {
   const { llmModelDownloadLink, setllmModelDownloadLink } = useStore();
+  const llmModelHuggungFace = llmModelDownloadLink;
   useEffect(() => {
     setllmModelDownloadLink(llmModelHuggungFace);
   }, []);
