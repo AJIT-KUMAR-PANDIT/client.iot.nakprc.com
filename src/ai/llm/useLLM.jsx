@@ -1,18 +1,10 @@
 import React, { useEffect } from "react";
 import { ChatWebLLM } from "@langchain/community/chat_models/webllm";
 import { HumanMessage } from "@langchain/core/messages";
-import useStore from "../../zustand/store";
-import Dashboard from "../../components/pages/Dashboard";
-
+import { getModel } from "../utlits/indexedDBStorage";
 export const useLLM = () => {
-  const { llmModelDownloadLink, setllmModelDownloadLink } = useStore();
-  const llmModelHuggungFace = llmModelDownloadLink;
-  useEffect(() => {
-    setllmModelDownloadLink(llmModelHuggungFace);
-  }, []);
-
   const modelConfig = {
-    model: llmModelDownloadLink,
+    model: () => getModel("lunaai.gguf"),
     chatOptions: {
       temperature: 0.5,
     },
