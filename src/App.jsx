@@ -21,6 +21,7 @@ function AppContent() {
   const [voiceAssistantOpen, setVoiceAssistantOpen] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [showTextChat, setShowTextChat] = useState(false);
+  const [showDownloadModel, setShowDownloadModel] = useState(false);
 
   const {
     isDarkMode,
@@ -55,6 +56,12 @@ function AppContent() {
       </div>
     );
   }
+
+  // Handler to open voice assistant and show download modal
+  const handleOpenVoiceAssistant = () => {
+    setVoiceAssistantOpen(true);
+    setShowDownloadModel(true);
+  };
 
   return (
     <div>
@@ -117,7 +124,7 @@ function AppContent() {
         <BottomNav
           setActiveTab={setActiveTab}
           setMenuOpen={setMenuOpen}
-          setVoiceAssistantOpen={setVoiceAssistantOpen}
+          setVoiceAssistantOpen={handleOpenVoiceAssistant}
         />
 
         {/* Luna AI Voice UI Overlay */}
@@ -130,9 +137,9 @@ function AppContent() {
               onClose={() => setVoiceAssistantOpen(false)}
               className="fixed inset-0 z-50"
             />
-            <DownloadModel />
           </>
         )}
+        <DownloadModel showModal={showDownloadModel} onClose={() => setShowDownloadModel(false)} />
       </div>
     </div>
   );
