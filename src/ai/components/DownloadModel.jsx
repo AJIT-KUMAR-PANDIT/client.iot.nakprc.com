@@ -12,6 +12,12 @@ import {
 } from "lucide-react";
 import { requestLargeStorage } from "../utlits/increaseStorage";
 import { storagePermission } from "../utlits/storagePermission";
+import {
+  storeModelInIndexedDB,
+  getModelFromIndexedDB,
+  deleteModelFromIndexedDB,
+  checkModelExistsInIndexedDB,
+} from "../utlits/indexedDBUtils";
 
 const platform = Capacitor.getPlatform();
 const isMobileApp = platform === "ios" || platform === "android" ? true : false;
@@ -37,7 +43,11 @@ export default function DownloadModel({ showModal, onClose }) {
 
         setIsModelDownloaded(result.exists);
       } else {
-        setIsModelDownloaded(localStorage.getItem("ggufModel") ? true : false);
+        // For web, check IndexedDB
+        const modelExists = await checkModelExistsInIndexedDB().catch(
+          () => false
+        );
+        setIsModelDownloaded(modelExists);
       }
     } catch (error) {
       console.error("Error checking if model exists:", error);
@@ -56,7 +66,8 @@ export default function DownloadModel({ showModal, onClose }) {
           directory: Directory.Documents,
         });
       } else {
-        localStorage.removeItem("ggufModel");
+        // For web, delete from IndexedDB
+        await deleteModelFromIndexedDB();
       }
       setIsModelDownloaded(false);
       console.log("Previous model deleted successfully");
@@ -143,11 +154,9 @@ export default function DownloadModel({ showModal, onClose }) {
 
         console.log("Model saved at:", filePath.uri);
       } else {
-        localStorage.setItem(
-          "ggufModel",
-          JSON.stringify(Array.from(modelData))
-        );
-        console.log("Model downloaded and saved locally.");
+        // For web, store in IndexedDB
+        await storeModelInIndexedDB(modelData); // Store Uint8Array directly
+        console.log("Model downloaded and saved in IndexedDB.");
       }
 
       setIsModelDownloaded(true);
