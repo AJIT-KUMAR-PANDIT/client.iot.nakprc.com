@@ -11,14 +11,14 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { requestLargeStorage } from "../utlits/increaseStorage";
-import { requestStoragePermission } from "../utlits/storagePermission";
+import { storagePermission } from "../utlits/storagePermission";
 
 const platform = Capacitor.getPlatform();
 const isMobileApp = platform === "ios" || platform === "android" ? true : false;
 const MODEL_PATH = "nakprc/models/lunaai.gguf";
 
 export default function DownloadModel({ showModal, onClose }) {
-  const { llmModelDownloadLink } = useStore();
+  const { llmModelDownloadLink, setllmModelDownloadLink } = useStore();
   const [isModelDownloaded, setIsModelDownloaded] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState(0);
   const [downloadError, setDownloadError] = useState(null);
@@ -70,6 +70,9 @@ export default function DownloadModel({ showModal, onClose }) {
 
   const downloadModel = async () => {
     // Ensure enough storage before downloading
+    setllmModelDownloadLink(
+      "https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0.Q2_K.gguf?download=true"
+    );
     if (!isMobileApp) {
       const hasQuota = await requestLargeStorage();
       if (!hasQuota) {
@@ -89,7 +92,9 @@ export default function DownloadModel({ showModal, onClose }) {
     setDownloadError(null);
 
     try {
-      const response = await fetch(llmModelDownloadLink);
+      const response = await fetch(llmModelDownloadLink, {
+        redirect: "follow",
+      });
       if (!response.ok) {
         throw new Error(
           `Failed to fetch model: ${response.status} ${response.statusText}`
@@ -156,7 +161,7 @@ export default function DownloadModel({ showModal, onClose }) {
 
   const requestPermission = async () => {
     setPermissionError(null);
-    const result = await requestStoragePermission();
+    const result = await storagePermission.requestPermission();
     if (result.granted) {
       setPermissionGranted(true);
     } else {
@@ -169,9 +174,9 @@ export default function DownloadModel({ showModal, onClose }) {
     checkIfModelIsDownloaded();
     // Check storage permission on mount
     (async () => {
-      const result = await requestStoragePermission();
-      setPermissionGranted(result.granted);
-      if (!result.granted) setPermissionError(result.message);
+      const result = await storagePermission.checkPermissionSilently();
+      setPermissionGranted(result);
+      if (!result) setPermissionError("Storage permission denied.");
     })();
   }, []);
 
