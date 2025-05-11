@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { ChatWebLLM } from "@langchain/community/chat_models/webllm";
 import { HumanMessage } from "@langchain/core/messages";
-import { getModel } from "../utlits/indexedDBStorage";
+import { getModelFromIndexedDB } from "../utlits/indexedDBUtils";
+import { storeModelInIndexedDB } from "../utlits/indexedDBUtils";
+
 export const useLLM = () => {
   const modelConfig = {
-    model: () => getModel("lunaai.gguf"),
+    model: () => getModelFromIndexedDB("lunaai.gguf"),
     chatOptions: {
       temperature: 0.5,
     },
@@ -13,8 +15,12 @@ export const useLLM = () => {
   const model = new ChatWebLLM(modelConfig);
 
   const initializeModel = async () => {
-    await model.initialize((progress) => {
+    await model.initialize(async (progress) => {
       console.log(progress);
+      if (progress === "complete") {
+        const modelData = await model.getModelData(); // Assuming getModelData fetches the model data
+        await storeModelInIndexedDB(modelData);
+      }
     });
   };
 
