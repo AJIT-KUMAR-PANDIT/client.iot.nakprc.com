@@ -1,0 +1,349 @@
+
+Voice commands and speech synthesis made easy
+Artyom.js is an useful wrapper of the speechSynthesis and webkitSpeechRecognition APIs.
+
+Besides, artyom.js also lets you to add voice commands to your website easily, build your own Google Now, Siri or Cortana !
+
+  
+Download .js
+
+Get on npm
+
+npm install artyom.js
+Get on bower
+
+bower install artyom.js
+Installation
+If you don't use any module bundler like browserify, require etc, just include the artyom window script in the head tag of your document and you are ready to go !
+
+<head>
+    <script src="artyom.window.min.js"></script>
+</head>
+The Artyom class would be now available and you can instantiate it:
+
+// If you are using VanillaJS
+const artyom = new Artyom();
+
+// Or if installed from NPM to use with a bundler
+import Artyom from "artyom.js"
+// const artyom = require("artyom.js");
+const artyom = new Artyom();
+Note
+
+You need to load artyom.js in the head tag to preload the voices in case you want to use the speechSynthesis API. otherwise you can still load it in the end of the body tag.
+
+About Artyom in this Browser
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
+According to your browser, speech synthesis and speech recognition may be available or not separately, use artyom.speechSupported and artyom.recognizingSupported methods to know it.
+
+ 
+ 
+These are the available voices of artyom in this browser. See the initialization codes in the initialization area or read the docs.
+
+
+Microsoft David - English (United States)
+
+Our Code Editor
+ Give artyom some orders in this website
+
+Since you're in this website artyom has been enabled. Try using any of the demo commands in the following list to test it !
+
+Trigger command with	Description	Smart
+hello how are you,how are you,hello	It is polite to greet people	no
+translate * in Spanish,translate * in german	undefined	true
+Pronunciate *	Pronunciate all that i say after Pronunciate	true
+Shut down yourself	Deactivate artyom with your voice	no
+I love you,I love you so much,do you love me	No comments ._.	no
+go to *	Navigate through zones of this document (go to initialization, go to download, go to github etc ..)	true
+Voice commands
+Before the initialization, we need to add some commands for being processed. Use the artyom.addCommands(commands) method to add commands.
+
+A command is a literal object with some properties. There are 2 types of commands normal and smarts.
+
+A smart command allow you to retrieve a value from a spoken string as a wildcard. Every command can be triggered for any of the identifiers given in the indexes array.
+
+const artyom = new Artyom();
+
+// Add a single command
+var commandHello = {
+    indexes:["hello","good morning","hey"], // These spoken words will trigger the execution of the command
+    action:function(){ // Action to be executed when a index match with spoken word
+        artyom.say("Hey buddy ! How are you today?");
+    }
+};
+
+artyom.addCommands(commandHello); // Add the command with addCommands method. Now
+
+// Or add multiple commands at time
+var myGroup = [
+    {
+        description:"If my database contains the name of a person say something",
+        smart:true, // a Smart command allow you to use wildcard in order to retrieve words that the user should say
+        // Ways to trigger the command with the voice
+        indexes:["Do you know who is *","I don't know who is *","Is * a good person"],
+        // Do something when the commands is triggered
+        action:function(i,wildcard){
+            var database = ["Carlos","Bruce","David","Joseph","Kenny"];
+
+            //If the command "is xxx a good person" is triggered do, else
+            if(i == 2){
+                if(database.indexOf(wildcard.trim())){
+                    artyom.say("I'm a machine, I dont know what is a feeling");
+                }else{
+                    artyom.say("I don't know who is " + wildcard + " and i cannot say if is a good person");
+                }
+            }else{
+                if(database.indexOf(wildcard.trim())){
+                    artyom.say("Of course i know who is "+ wildcard + ". A really good person");
+                }else{
+                    artyom.say("My database is not big enough, I don't know who is " + wildcard);
+                }
+            }
+        }
+    },
+    {
+        indexes:["What time is it","Is too late"],
+        action:function(i){ // var i returns the index of the recognized command in the previous array
+            if(i == 0){
+                aFunctionThatSaysTheTime(new Date());
+            }else if(i == 1){
+                artyom.say("Never is too late to do something my friend !");
+            }
+        }
+    }
+];
+
+artyom.addCommands(myGroup); 
+ Pro tip
+
+You can add commands dinamically while artyom is active. The commands are stored in an array so you can add them whenever you want and they'll be processed.
+
+Start artyom
+Now that artyom has commands, these can be processed. Artyom can work in continuous and uncontinuous mode.
+
+Remember that artyom provides you the possibility to process the commands with a server language instead of javascript, you can enable the remote mode of artyom and use the artyom.remoteProcessorService method.
+
+Note
+
+You'll need an SSL certificate in your website (https connection) in order to use the continuous mode, otherwise you'll be prompted for the permission to access the microphone everytime the recognition ends.
+
+const artyom = new Artyom();
+// This function activates artyom and will listen and execute only 1 command (for http connections)
+function startOneCommandArtyom(){
+    artyom.fatality();// use this to stop any of
+
+    setTimeout(function(){// if you use artyom.fatality , wait 250 ms to initialize again.
+         artyom.initialize({
+            lang:"en-GB",// A lot of languages are supported. Read the docs !
+            continuous:false,// recognize 1 command and stop listening !
+            listen:true, // Start recognizing
+            debug:true, // Show everything in the console
+            speed:1 // talk normally
+        }).then(function(){
+            console.log("Ready to work !");
+        });
+    },250);
+}
+
+// This function activates artyom and will listen all that you say forever (requires https conection, otherwise a dialog will request if you allow the use of the microphone)
+function startContinuousArtyom(){
+    artyom.fatality();// use this to stop any of
+
+    setTimeout(function(){// if you use artyom.fatality , wait 250 ms to initialize again.
+         artyom.initialize({
+            lang:"en-GB",// A lot of languages are supported. Read the docs !
+            continuous:true,// Artyom will listen forever
+            listen:true, // Start recognizing
+            debug:true, // Show everything in the console
+            speed:1 // talk normally
+        }).then(function(){
+            console.log("Ready to work !");
+        });
+    },250);
+}
+ Pro tip
+
+Set always the debug property to true if you're working with artyom locally, you'll find convenient, valuable messages and information in the browser console.
+
+Artyom supports many languages
+just change the code of the lang property at initialization
+
+Russian русскийJapanese 日本人DutchIndonesianPolskiChinese (cantonese and mandarin)
+EnglishPortuguêsItalianoEspañolDeutschFrançais
+Hindi
+Speech text
+Use artyom.say to speak text. The language is retrieven at the initialization from the lang property.
+
+Note
+
+Artyom removes the limitation of the traditional API (about 150 characters max. Read more about this issue here).
+
+With artyom you can read very extense text chunks without being blocked and the onEnd and onStart callbacks will be respected.
+
+artyom.say("Good morning, i'm hungry. Do you want to eat something?",{
+    onStart:function(){
+        console.log("The text is being readed");
+    },
+    onEnd:function(){
+        console.log("Well, that was all. Try with a longer text !");
+    }
+});
+
+artyom.say("Now i'll say this");
+
+artyom.say("And this after the previous spoken text.");
+ Pro tip
+
+Split the text by yourself in the way you want and execute and use artyom.say many times to decrease the probability of limitation of characters in the spoken text.
+
+Speech text
+Test it by yourself paste all the text you want in the following textarea and click on speak to hear it !
+
+Hello, how are you today?
+Speech to text
+Convert what you say into text easily with the dictation object.
+
+var UserDictation = artyom.newDictation({
+    continuous:true, // Enable continuous if HTTPS connection
+    onResult:function(text){
+        // Do something with the text
+        console.log(text);
+    },
+    onStart:function(){
+        console.log("Dictation started by the user");
+    },
+    onEnd:function(){
+        alert("Dictation stopped by the user");
+    }
+});
+
+UserDictation.start();
+
+// Stop whenever you want
+// UserDictation.stop();
+Note
+
+You'll need to stop artyom before start a new dictation using artyom.fatality as 2 instances of webkitSpeechRecognition cannot run at time.
+
+Simulate instructions without say a word
+You can simulate a command without use the microphone using artyom.simulateInstruction("command identifier") for test purposes (or you don't have any microphone for test).
+
+const artyom = new Artyom();
+
+/**
+ * Add a command that reacts to "Hello"
+ */
+artyom.addCommands([
+    {
+        indexes:["Hello"],
+        action:function(){
+            alert("Hey, how are you");
+        }
+    }
+]);
+
+
+artyom.simulateInstruction("Hello"); //Simulate a voice  command with voice "hello".
+Try simulating any of the commands of this document like "hello","go to github" etc.
+
+how are you?
+Get spoken text while artyom is active
+If you want to show the user the recognized text while artyom is active, you can redirect the output of the speech recognition of artyom using artyom.redirectRecognizedTextOutput.
+
+artyom.redirectRecognizedTextOutput(function(recognized,isFinal){
+    if(isFinal){
+        console.log("Final recognized text: " + recognized);
+    }else{
+        console.log(recognized);
+    }
+});
+All that you say on this website will be shown in the following box:
+
+Pause and resume commands recognition
+You can pause the commands recognition, not the original speechRecognition. The text recognition will continue but the commands execution will be paused using the artyom.dontObey method.
+
+To resume the command recognition use the artyom.obey. Alternatively, use the obeyKeyword property to enable with the voice at the initialization.
+
+// Initialize artyom
+// <some code to initialize>
+// <add "say hi" command>
+// then set dontObey
+artyom.dontObey();
+
+// Try to execute the say hi command, nothing will happen
+// but in 10 seconds, the command recognition will be available again
+setTimeout(function(){
+    artyom.obey();
+
+    // execute the say hi command and then it will work !
+}, 10000);
+Useful keywords
+Use the executionKeyword at the initialization to execute immediately a command though you are still talking.
+Use the obeyKeyword to resume the commands recognition if you use the pause method (artyom.dontObey). If you say this keyword while artyom is paused, artyom will be resumed and it will continue processing commands automatically.
+
+const artyom = new Artyom();
+
+// obeyKeyword
+// command : "play some music"
+// If it's paused, you can say :
+// listen to me, play some music
+artyom.initialize({
+    continuous:true,
+    lang:"en-US",
+    obeyKeyword: "listen to me",
+    listen:true,
+    debug:true
+});
+// obeyKeyword
+// command : "play some music"
+// To execute immediately though you can still talking, say :
+// play some music and do it now
+artyom.initialize({
+    continuous:true,
+    lang:"en-US",
+    executionKeyword: "and do it now",
+    listen:true,
+    debug:true
+});
+Trending tops in Our Code World
+
+Top 7 : Best free web development IDE for JavaScript, HTML and CSS
+See the review from 7 of the best free IDE (and code editors) for web proyects development in Our Code World.
+
+
+Top 5 : Best jQuery scheduler and events calendar for web applications
+See the review from 5 of the best dynamics scheduler and events calendar for Web applications with Javascript and jQuery in Our Code World
+
+
+Top 20: Best free bootstrap admin templates
+See the collection from 20 of the most imponent Admin templates built in bootstrap for free in Our Code World.
+
+Thanks for read everything !
+ Support the project
+Did you like artyom?
+If you did, please consider in give a star on the github repository and share this project with your developer friends !
+
+We are already  persons supporting artyom.js
+
+ I'm here to help you
+Issues and troubleshooting
+If you need help while you're trying to implement artyom and something is not working, or you have suggestions please report a ticket in the issues are on github and i'll try to help you ASAP.
+
+About Artyom.js
+Artyom is a robust but easy to use wrappers of the speechSynthesis and webkitSpeechRecognition APIs.
+
+Add commands, start artyom, give orders and await for a result in real time , in the same way that the famous J.A.R.V.I.S does.
+
+Other projects
+HoldOn.js (loading overlay)
+Our Code Editor (android)
+Our Context Menu
+Sponsored ocw links
+Introduction to the Javascript promises
+How to copy text to clipboard with Javascript easily
+How to capture an image from a DOM element with javascript
+What is the debounce method and how to use it in Javascript
+Read programming articles
+Visit Our Code World
+ 
+© 2016 Copyright Carlos Delgado - ourcodeworld.com
