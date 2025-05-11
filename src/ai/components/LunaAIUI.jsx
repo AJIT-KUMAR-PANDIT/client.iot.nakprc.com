@@ -1,6 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Mic, MicOff, Send, Moon, MoreVertical, Settings } from "lucide-react";
+import {
+  Mic,
+  MicOff,
+  Send,
+  Moon,
+  MoreVertical,
+  Settings,
+  AlertCircle,
+} from "lucide-react";
 import { useLLM } from "../llm/useLLM"; // Added import for useLLM
+import { checkModelExistsInIndexedDB } from "../utlits/indexedDBUtils";
 
 // Luna AI Voice UI component
 const LunaAIUI = ({ onToggleSettings, onClose }) => {
@@ -13,6 +22,10 @@ const LunaAIUI = ({ onToggleSettings, onClose }) => {
   const [isDeviceControlMode, setIsDeviceControlMode] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState("");
+  // State for text chat interface
+  const [showTextChat, setShowTextChat] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [showOptionsMenu, setShowOptionsMenu] = useState(false);
   // Track previous state to detect changes
   const prevStateRef = useRef(currentState);
 
@@ -22,6 +35,42 @@ const LunaAIUI = ({ onToggleSettings, onClose }) => {
 
   // Initialize LLM
   const { llmResponse, llmResponseStream } = useLLM(); // Initialize useLLM
+  const [modelLoadingStatus, setModelLoadingStatus] = useState({
+    isLoading: true,
+    isLoaded: false,
+    error: null,
+  });
+
+  // Check model loading status
+  useEffect(() => {
+    const checkModelStatus = async () => {
+      try {
+        const modelExists = await checkModelExistsInIndexedDB();
+        if (!modelExists) {
+          setModelLoadingStatus({
+            isLoading: false,
+            isLoaded: false,
+            error: "Model not found. Please download the model first.",
+          });
+          return;
+        }
+
+        setModelLoadingStatus({
+          isLoading: false,
+          isLoaded: true,
+          error: null,
+        });
+      } catch (error) {
+        setModelLoadingStatus({
+          isLoading: false,
+          isLoaded: false,
+          error: error.message || "Error checking model status",
+        });
+      }
+    };
+
+    checkModelStatus();
+  }, []);
 
   // Effect to scroll messages to bottom
   useEffect(() => {
@@ -148,33 +197,105 @@ const LunaAIUI = ({ onToggleSettings, onClose }) => {
     setMessage(`Processing: "${transcript}"`);
 
     try {
+      // Check if model is available
+      const modelExists = await checkModelExistsInIndexedDB().catch(
+        () => false
+      );
+      if (!modelExists) {
+        throw new Error("Model not found. Please download the model first.");
+      }
+
+      // Create a placeholder for streaming response
+      const responseId = Date.now() + 1;
+      const initialAssistantMessage = {
+        id: responseId,
+        role: "assistant",
+        content: "",
+        timestamp: new Date(),
+        isStreaming: true,
+      };
+      setMessages((prevMessages) => [...prevMessages, initialAssistantMessage]);
+
+      // Try to use streaming response if available
+      try {
+        const stream = await llmResponseStream(transcript);
+        if (stream) {
+          let accumulatedContent = "";
+
+          for await (const chunk of stream) {
+            accumulatedContent += chunk.content;
+            // Update the message with accumulated content
+            setMessages((prevMessages) =>
+              prevMessages.map((msg) =>
+                msg.id === responseId
+                  ? { ...msg, content: accumulatedContent }
+                  : msg
+              )
+            );
+            // Also update the current message display
+            setMessage(accumulatedContent);
+          }
+
+          // Mark streaming as complete
+          setMessages((prevMessages) =>
+            prevMessages.map((msg) =>
+              msg.id === responseId ? { ...msg, isStreaming: false } : msg
+            )
+          );
+
+          // Process the final response
+          const aiMessageContent =
+            accumulatedContent || "Sorry, I couldn't process that.";
+          processAIResponse(aiMessageContent, responseId);
+          return;
+        }
+      } catch (streamError) {
+        console.warn(
+          "Streaming failed, falling back to regular response:",
+          streamError
+        );
+        // If streaming fails, we'll fall back to regular response below
+      }
+
+      // Fall back to regular response if streaming isn't available
       const aiResponse = await llmResponse(transcript);
+      if (!aiResponse) {
+        throw new Error("No response from AI model. Please try again.");
+      }
+
       const aiMessageContent =
         aiResponse?.content || "Sorry, I couldn't process that.";
 
-      const assistantMessage = {
-        id: Date.now() + 1,
-        role: "assistant",
-        content: aiMessageContent,
-        timestamp: new Date(),
-      };
-      setMessages((prevMessages) => [...prevMessages, assistantMessage]);
+      // Update the placeholder message with the actual content
+      setMessages((prevMessages) =>
+        prevMessages.map((msg) =>
+          msg.id === responseId
+            ? { ...msg, content: aiMessageContent, isStreaming: false }
+            : msg
+        )
+      );
 
-      setCurrentState("speaking");
-      setMessage(aiMessageContent);
-      speak(aiMessageContent);
+      processAIResponse(aiMessageContent, responseId);
     } catch (error) {
       console.error("Error processing transcript:", error);
       const errorMessage = {
         id: Date.now() + 1,
         role: "assistant",
-        content: "Sorry, I encountered an error processing your request.",
+        content:
+          error.message ||
+          "Sorry, I encountered an error processing your request.",
         timestamp: new Date(),
       };
       setMessages((prevMessages) => [...prevMessages, errorMessage]);
       setCurrentState("error");
-      setMessage("Sorry, I encountered an error processing your request.");
-      speak("Sorry, I encountered an error processing your request.");
+      setMessage(
+        error.message ||
+          "Sorry, I encountered an error processing your request."
+      );
+      speak(
+        error.message ||
+          "Sorry, I encountered an error processing your request."
+      );
     }
   };
 
@@ -201,7 +322,6 @@ const LunaAIUI = ({ onToggleSettings, onClose }) => {
   };
 
   // Handle text input submission
-  // Handle text input submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -221,52 +341,130 @@ const LunaAIUI = ({ onToggleSettings, onClose }) => {
     setMessage(`Processing: "${query}"`);
 
     try {
-      // Process with AI
+      // Check if model is available
+      const modelExists = await checkModelExistsInIndexedDB().catch(
+        () => false
+      );
+      if (!modelExists) {
+        throw new Error("Model not found. Please download the model first.");
+      }
+
+      // Create a placeholder for streaming response
+      const responseId = Date.now() + 1;
+      const initialAssistantMessage = {
+        id: responseId,
+        role: "assistant",
+        content: "",
+        timestamp: new Date(),
+        isStreaming: true,
+      };
+      setMessages((prevMessages) => [...prevMessages, initialAssistantMessage]);
+
+      // Try to use streaming response if available
+      try {
+        const stream = await llmResponseStream(query);
+        if (stream) {
+          let accumulatedContent = "";
+
+          for await (const chunk of stream) {
+            accumulatedContent += chunk.content;
+            // Update the message with accumulated content
+            setMessages((prevMessages) =>
+              prevMessages.map((msg) =>
+                msg.id === responseId
+                  ? { ...msg, content: accumulatedContent }
+                  : msg
+              )
+            );
+            // Also update the current message display
+            setMessage(accumulatedContent);
+          }
+
+          // Mark streaming as complete
+          setMessages((prevMessages) =>
+            prevMessages.map((msg) =>
+              msg.id === responseId ? { ...msg, isStreaming: false } : msg
+            )
+          );
+
+          // Process the final response
+          const aiMessageContent =
+            accumulatedContent || "Sorry, I couldn't understand that.";
+          processAIResponse(aiMessageContent, responseId);
+          return;
+        }
+      } catch (streamError) {
+        console.warn(
+          "Streaming failed, falling back to regular response:",
+          streamError
+        );
+        // If streaming fails, we'll fall back to regular response below
+      }
+
+      // Fall back to regular response if streaming isn't available
       const aiResponse = await llmResponse(query);
+      if (!aiResponse) {
+        throw new Error("No response from AI model. Please try again.");
+      }
+
       const aiMessageContent =
         aiResponse?.content || "Sorry, I couldn't understand that.";
 
-      const assistantMessage = {
-        id: Date.now() + 1, // Ensure unique ID
-        role: "assistant",
-        content: aiMessageContent,
-        timestamp: new Date(),
-      };
-      setMessages((prevMessages) => [...prevMessages, assistantMessage]);
+      // Update the placeholder message with the actual content
+      setMessages((prevMessages) =>
+        prevMessages.map((msg) =>
+          msg.id === responseId
+            ? { ...msg, content: aiMessageContent, isStreaming: false }
+            : msg
+        )
+      );
 
-      // Check if it's a device command (this part might need adjustment based on LLM output format)
-      const commandMatch = aiMessageContent.match(/^COMMAND:(.*)/);
-      if (commandMatch && commandMatch[1]) {
-        const command = commandMatch[1].trim();
-        const result = await executeCommand(command);
-
-        if (result && result.success) {
-          setCurrentState("success");
-          setMessage(result.message || "Command executed successfully");
-          speak(result.message || "Command executed successfully");
-        } else {
-          setCurrentState("error");
-          setMessage(result?.message || "Failed to execute command");
-          speak(result?.message || "Failed to execute command");
-        }
-      } else {
-        // Normal response
-        setCurrentState("speaking");
-        setMessage(aiMessageContent);
-        speak(aiMessageContent);
-      }
+      processAIResponse(aiMessageContent, responseId);
     } catch (error) {
       console.error("Error processing text input:", error);
       const errorMessage = {
         id: Date.now() + 1,
         role: "assistant",
-        content: "Sorry, I encountered an error processing your request.",
+        content:
+          error.message ||
+          "Sorry, I encountered an error processing your request.",
         timestamp: new Date(),
       };
       setMessages((prevMessages) => [...prevMessages, errorMessage]);
       setCurrentState("error");
-      setMessage("Sorry, I encountered an error processing your request.");
-      speak("Sorry, I encountered an error processing your request.");
+      setMessage(
+        error.message ||
+          "Sorry, I encountered an error processing your request."
+      );
+      speak(
+        error.message ||
+          "Sorry, I encountered an error processing your request."
+      );
+    }
+  };
+
+  // Helper function to process AI response
+  const processAIResponse = async (aiMessageContent, messageId) => {
+    // Check if it's a device command
+    const commandMatch = aiMessageContent.match(/^COMMAND:(.*)/);
+    if (commandMatch && commandMatch[1]) {
+      const command = commandMatch[1].trim();
+      const result = await executeCommand(command);
+
+      if (result && result.success) {
+        setCurrentState("success");
+        setMessage(result.message || "Command executed successfully");
+        speak(result.message || "Command executed successfully");
+      } else {
+        setCurrentState("error");
+        setMessage(result?.message || "Failed to execute command");
+        speak(result?.message || "Failed to execute command");
+      }
+    } else {
+      // Normal response
+      setCurrentState("speaking");
+      setMessage(aiMessageContent);
+      speak(aiMessageContent);
     }
   };
 
@@ -388,10 +586,7 @@ const LunaAIUI = ({ onToggleSettings, onClose }) => {
     }
   };
 
-  // State for text chat interface
-  const [showTextChat, setShowTextChat] = useState(false);
-  const [messages, setMessages] = useState([]);
-  const [showOptionsMenu, setShowOptionsMenu] = useState(false);
+  // Reference for message container
   const messageContainerRef = useRef(null);
 
   // Update component return structure
@@ -461,6 +656,26 @@ const LunaAIUI = ({ onToggleSettings, onClose }) => {
                 </button>
               </div>
 
+              {/* Model Status Indicator */}
+              {modelLoadingStatus.isLoading && (
+                <div className="bg-blue-900/40 border border-blue-700 rounded-lg p-3 mb-4 flex items-start">
+                  <div className="animate-spin mr-2 h-4 w-4 border-2 border-blue-400 border-t-transparent rounded-full"></div>
+                  <p className="text-blue-300 text-sm">Loading AI model...</p>
+                </div>
+              )}
+
+              {modelLoadingStatus.error && (
+                <div className="bg-red-900/40 border border-red-700 rounded-lg p-3 mb-4 flex items-start">
+                  <AlertCircle
+                    className="text-red-400 mr-2 flex-shrink-0 mt-0.5"
+                    size={16}
+                  />
+                  <p className="text-red-300 text-sm">
+                    {modelLoadingStatus.error}
+                  </p>
+                </div>
+              )}
+
               {/* Chat Messages */}
               <div
                 className="flex-1 overflow-y-auto mb-4 space-y-4 px-2"
@@ -478,6 +693,9 @@ const LunaAIUI = ({ onToggleSettings, onClose }) => {
                     }`}
                   >
                     {message.content}
+                    {message.isStreaming && (
+                      <span className="inline-block w-2 h-4 ml-1 bg-blue-400 animate-pulse"></span>
+                    )}
                     {/* {settings.uiSettings.showTimestamps && ( // Assuming settings is defined elsewhere or remove this line
                       <div className="text-xs opacity-70 mt-1">
                         {formatTime(new Date(message.timestamp))}
