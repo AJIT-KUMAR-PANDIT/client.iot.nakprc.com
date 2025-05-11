@@ -17,11 +17,26 @@ import {
   getModelFromIndexedDB,
   deleteModelFromIndexedDB,
   checkModelExistsInIndexedDB,
+  getModelSizeFromIndexedDB,
 } from "../utlits/indexedDBUtils";
+
+// Constants for model information
+const MODEL_NAME = "tinyllama-1.1b-chat-v1.0.Q2_K.gguf";
+const MODEL_URL =
+  "https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0.Q2_K.gguf?download=true";
 
 const platform = Capacitor.getPlatform();
 const isMobileApp = platform === "ios" || platform === "android" ? true : false;
 const MODEL_PATH = "nakprc/models/lunaai.gguf";
+
+// Helper function to format file size
+const formatFileSize = (bytes) => {
+  if (bytes === 0) return "0 Bytes";
+  const k = 1024;
+  const sizes = ["Bytes", "KB", "MB", "GB"];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+};
 
 export default function DownloadModel({ showModal, onClose }) {
   const { llmModelDownloadLink, setllmModelDownloadLink } = useStore();
@@ -32,6 +47,7 @@ export default function DownloadModel({ showModal, onClose }) {
   const [deleting, setDeleting] = useState(false);
   const [permissionGranted, setPermissionGranted] = useState(null);
   const [permissionError, setPermissionError] = useState(null);
+  const [modelSize, setModelSize] = useState(0);
 
   const checkIfModelIsDownloaded = async () => {
     try {
@@ -42,12 +58,35 @@ export default function DownloadModel({ showModal, onClose }) {
         }).catch(() => ({ exists: false }));
 
         setIsModelDownloaded(result.exists);
+
+        // Get file size for mobile if exists
+        if (result.exists) {
+          try {
+            const fileInfo = await Filesystem.stat({
+              path: MODEL_PATH,
+              directory: Directory.Documents,
+            });
+            setModelSize(fileInfo.size || 0);
+          } catch (e) {
+            console.error("Error getting file size:", e);
+          }
+        }
       } else {
         // For web, check IndexedDB
         const modelExists = await checkModelExistsInIndexedDB().catch(
           () => false
         );
         setIsModelDownloaded(modelExists);
+
+        // Get model size from IndexedDB if exists
+        if (modelExists) {
+          try {
+            const size = await getModelSizeFromIndexedDB();
+            setModelSize(size);
+          } catch (e) {
+            console.error("Error getting model size from IndexedDB:", e);
+          }
+        }
       }
     } catch (error) {
       console.error("Error checking if model exists:", error);
@@ -81,9 +120,7 @@ export default function DownloadModel({ showModal, onClose }) {
 
   const downloadModel = async () => {
     // Ensure enough storage before downloading
-    setllmModelDownloadLink(
-      "https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0.Q2_K.gguf?download=true"
-    );
+    setllmModelDownloadLink(MODEL_URL);
     if (!isMobileApp) {
       const hasQuota = await requestLargeStorage();
       if (!hasQuota) {
@@ -155,8 +192,17 @@ export default function DownloadModel({ showModal, onClose }) {
         console.log("Model saved at:", filePath.uri);
       } else {
         // For web, store in IndexedDB
-        await storeModelInIndexedDB(modelData); // Store Uint8Array directly
-        console.log("Model downloaded and saved in IndexedDB.");
+        try {
+          await storeModelInIndexedDB(modelData); // Store Uint8Array directly
+          console.log("Model downloaded and saved in IndexedDB.");
+          // Update model size after successful storage
+          setModelSize(modelData.byteLength);
+        } catch (error) {
+          console.error("Error storing model in IndexedDB:", error);
+          throw new Error(
+            `Failed to store model in IndexedDB: ${error.message}`
+          );
+        }
       }
 
       setIsModelDownloaded(true);
